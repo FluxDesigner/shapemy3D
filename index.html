@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>shapemy3D</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#e8edf2;--panel:#f6f8fa;--ink:#17212b;--mute:#5b6b7a;--line:#c5ced7;--acc:#0a5fd6;--accink:#fff;--box:#2f6fd0;--lid:#e0833a;--scene:#dfe6ed;--grid:#b4c0cc;--ins:#2e9d6f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#26313b;--ins:#5cc79a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#26313b;--ins:#5cc79a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.45 "IBM Plex Sans",system-ui,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:14px 20px 4px}
+h1{font:700 26px/1.1 "Bricolage Grotesque",system-ui,sans-serif;margin:0}
+#sub{flex:1 1 100%;margin:0;color:var(--mute)}
+.sp{flex:1}
+select,input[type=text],input[type=number]{padding:5px 6px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:4px;font:inherit}
+main{display:flex;flex-wrap:wrap;gap:16px;padding:12px 20px 24px}
+#view{flex:2 1 420px;min-height:340px;height:min(62vh,560px);background:var(--scene);border:1px solid var(--line);border-radius:6px;position:relative;touch-action:none;cursor:grab}
+#view canvas{display:block;width:100%;height:100%}
+#hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--mute);pointer-events:none}
+aside{flex:1 1 300px;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.row{display:grid;grid-template-columns:1fr 74px;gap:2px 10px;align-items:center;margin-bottom:10px}
+.row label{grid-column:1/3;font-weight:500}
+.row select,.row input[type=text]{grid-column:1/3;width:100%}
+.row input[type=range]{width:100%;accent-color:var(--acc)}
+.info{margin:6px 0 12px;color:var(--mute);font-size:13px}
+.warn{color:#c0392b;font-weight:500}
+.btns{display:grid;gap:8px}
+button{font:500 15px "IBM Plex Sans",system-ui,sans-serif;padding:9px 12px;border-radius:5px;border:1px solid var(--acc);background:var(--acc);color:var(--accink);cursor:pointer}
+button.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.top{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:10px 20px;background:var(--acc);color:var(--accink);font-size:14px}
+.top a{color:var(--accink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<div class="top"><span>Created by <strong>Flux_Designer</strong>. If you enjoy this tool, please support my work:</span><a href="https://makerworld.com/cs/@Flux_Designer" target="_blank" rel="noopener">MakerWorld</a><a href="https://www.crealitycloud.com/user/2345283632/model" target="_blank" rel="noopener">Creality Cloud</a></div>
+<header><h1>shapemy3D</h1><span class="sp"></span><select id="lg" aria-label="Language"><option value="cs">Čeština</option><option value="en">English</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option></select><button id="th" class="alt" aria-label="Theme">◐</button><p id="sub"></p></header>
+<main>
+<div id="view"><span id="hint"></span></div>
+<aside><div id="ctl"></div><div class="info" id="info"></div>
+<div class="btns"><button id="bStl"></button><button id="bPng" class="alt"></button></div></aside>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var LG={
+cs:"Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Pant print-in-place|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka",
+en:"Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set the dimensions, check the 3D view and download the STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment",
+de:"Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach",
+es:"Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta las medidas, revisa el 3D y descarga el STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento",
+fr:"Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment"};
+var lang=(navigator.language||"cs").slice(0,2);if(!LG[lang])lang="cs";
+var mode="box",v={w:60,d:40,h:30,t:2,f:2,lt:2,lh:4,c:0.25,hg:1,ins:1,cols:2,rows:2,dt:1.2,ic:.3,ih:20};
+var DEF={box:[["w",2,20,200,1],["d",3,20,200,1],["h",4,10,120,1],["t",5,1,6,.2],["f",6,1,6,.2],["lt",7,1,6,.2],["lh",8,2,12,.5],["c",9,0,1,.05],["hg",10,"chk"],["ins",31,"chk"],["cols",32,1,8,1],["rows",33,1,8,1],["dt",34,.8,3,.2],["ic",35,0,1,.05],["ih",36,5,100,1]]};
+function T(i){return LG[lang].split("|")[i]}
+var $=function(i){return document.getElementById(i)};
+/* geometrie */
+var Q=[[0,3,2,1],[4,5,6,7],[0,1,5,4],[2,3,7,6],[3,0,4,7],[1,2,6,5]];
+function bx(B){var o=[];B.forEach(function(b){var c=[[b[0],b[1],b[2]],[b[3],b[1],b[2]],[b[3],b[4],b[2]],[b[0],b[4],b[2]],[b[0],b[1],b[5]],[b[3],b[1],b[5]],[b[3],b[4],b[5]],[b[0],b[4],b[5]]];Q.forEach(function(q){[0,1,2,0,2,3].forEach(function(i){o.push.apply(o,c[q[i]])})})});return new Float32Array(o)}
+function ex(pts,d,hole){var s=new THREE.Shape(pts.map(function(p){return new THREE.Vector2(p[0],p[1])}));if(hole)s.holes.push(new THREE.Path(hole.map(function(p){return new THREE.Vector2(p[0],p[1])})));return new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:false}).attributes.position.array}
+function cir(x,y,r,n){var p=[];for(var k=0;k<n;k++){var a=k/n*6.28318;p.push([x+r*Math.cos(a),y+r*Math.sin(a)])}return p}
+function mv(a,f){var o=new Float32Array(a.length);for(var i=0;i<a.length;i+=3){var p=f(a[i],a[i+1],a[i+2]);o[i]=p[0];o[i+1]=p[1];o[i+2]=p[2]}return o}
+function mx(a,x0){return mv(a,function(X,Y,Z){return[x0+Z,Y,-X]})}
+function boxParts(){
+ var W=v.w,D=v.d,H=v.h,t=v.t,f=v.f,lt=v.lt,lh=v.lh,c=v.c,lw=Math.max(1,t*.75),r=3,hg=v.hg,oy=hg?D+2*r:0,ox=hg?0:W+10;
+ var B=[[0,0,0,W,D,f],[0,0,f,W,t,H],[0,D-t,f,W,D,H],[0,t,f,t,D-t,H],[W-t,t,f,W,D-t,H]];
+ var x0=ox+t+c,x1=ox+W-t-c,y0=oy+t+c,y1=oy+D-t-c;
+ var Ld=[[ox,oy,0,ox+W,oy+D,lt],[x0,y0,lt,x1,y0+lw,lt+lh],[x0,y1-lw,lt,x1,y1,lt+lh],[x0,y0+lw,lt,x0+lw,y1-lw,lt+lh],[x1-lw,y0+lw,lt,x1,y1-lw,lt+lh]];
+ var ok=(x1-x0)>2*lw+1&&(y1-y0)>2*lw+1&&H>f+1&&(!hg||(W>=24&&H+lt>=8));
+ var P=[{a:bx(B),k:0},{a:bx(Ld),k:1}];
+ if(hg&&ok){
+  var za=(H+lt)/2,ya=D+r,rp=1.2,rh=rp+Math.max(Math.min(c,.6),.25),gx=.5+c,span=W-8,sl=(span-2*gx)/3,xs=[4,4+sl+gx,4+2*(sl+gx)];
+  var bk=[bx([[xs[0],D,0,xs[0]+sl,D+r,za],[xs[2],D,0,xs[2]+sl,D+r,za]]),mx(ex(cir(-za,ya,r,24),sl),xs[0]),mx(ex(cir(-za,ya,r,24),sl),xs[2]),mx(ex(cir(-za,ya,rp,16),span),4)];
+  bk.forEach(function(a){P.push({a:a,k:0})});
+  P.push({a:mx(ex(cir(-za,ya,r,24),sl,cir(-za,ya,rh,20)),xs[1]),k:1});
+  P.push({a:bx([[xs[1],ya+rh+.3,0,xs[1]+sl,D+2*r,za]]),k:1});
+ }
+ var inf="";
+ if(v.ins&&ok){
+  var ic=v.ic,dt=v.dt,ix=W-2*t-2*ic,iy=D-2*t-2*ic,ihe=Math.min(v.ih,H-f-lh),fi=1.2,px=hg?W+10:2*W+20,py=0,n=v.cols,m=v.rows,cw=(ix-(n+1)*dt)/n,ch=(iy-(m+1)*dt)/m;
+  if(cw<3||ch<3||ihe<fi+3)ok=false;
+  else{
+   var I=[[px,py,0,px+ix,py+iy,fi],[px,py,fi,px+ix,py+dt,ihe],[px,py+iy-dt,fi,px+ix,py+iy,ihe],[px,py+dt,fi,px+dt,py+iy-dt,ihe],[px+ix-dt,py+dt,fi,px+ix,py+iy-dt,ihe]],i,j,xx,yy,xb;
+   for(i=1;i<n;i++){xx=px+dt+i*cw+(i-1)*dt;I.push([xx,py+dt,fi,xx+dt,py+iy-dt,ihe])}
+   for(i=1;i<m;i++){yy=py+dt+i*ch+(i-1)*dt;for(j=0;j<n;j++){xb=px+dt+j*(cw+dt);I.push([xb,yy,fi,xb+cw,yy+dt,ihe])}}
+   P.push({a:bx(I),k:2});
+   inf="<br>"+T(37)+": "+cw.toFixed(1)+" × "+ch.toFixed(1)+" × "+(ihe-fi).toFixed(1)+" mm";
+  }
+ }
+ return{P:P,info:ok?T(22)+": "+(W-2*t).toFixed(1)+" × "+(D-2*t).toFixed(1)+" × "+(H-f).toFixed(1)+" mm"+inf:'<span class="warn">'+T(23)+"</span>"};
+}
+function cur(){return boxParts()}
+/* 3D náhled */
+var view=$("view"),R=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}),S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,1,3000);
+C.up.set(0,0,1);view.insertBefore(R.domElement,view.firstChild);
+S.add(new THREE.HemisphereLight(0xffffff,0x667788,.75));var dl=new THREE.DirectionalLight(0xffffff,.7);dl.position.set(1,-1.5,2);S.add(dl);
+var mBox=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mLid=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mIns=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),meshes=[],grid=new THREE.GridHelper(600,60);
+grid.rotation.x=Math.PI/2;grid.position.z=-.05;S.add(grid);
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+var th=-1.2,ph=1.0,dist=180,tgt=new THREE.Vector3();
+function draw(){
+ var w=view.clientWidth,h=view.clientHeight;
+ if(R.domElement.width!==Math.round(w*devicePixelRatio)){R.setPixelRatio(devicePixelRatio);R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix()}
+ R.setClearColor(css("--scene"));mBox.color.set(css("--box"));mLid.color.set(css("--lid"));mIns.color.set(css("--ins"));grid.material.color.set(css("--grid"));
+ C.position.set(tgt.x+dist*Math.sin(ph)*Math.cos(th),tgt.y+dist*Math.sin(ph)*Math.sin(th),tgt.z+dist*Math.cos(ph));C.lookAt(tgt);R.render(S,C);
+}
+function update(fit){
+ var g=cur(),mn=[1e9,1e9,1e9],mxx=[-1e9,-1e9,-1e9];
+ meshes.forEach(function(m){S.remove(m);m.geometry.dispose()});meshes=[];
+ g.P.forEach(function(p){
+  var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(p.a,3));geo.computeVertexNormals();
+  var m=new THREE.Mesh(geo,p.k==2?mIns:p.k?mLid:mBox);S.add(m);meshes.push(m);
+  for(var i=0;i<p.a.length;i++){var j=i%3;if(p.a[i]<mn[j])mn[j]=p.a[i];if(p.a[i]>mxx[j])mxx[j]=p.a[i]}
+ });
+ tgt.set((mn[0]+mxx[0])/2,(mn[1]+mxx[1])/2,(mn[2]+mxx[2])/2);
+ if(fit)dist=Math.max(mxx[0]-mn[0],mxx[1]-mn[1],mxx[2]-mn[2])*2.3;
+ $("info").innerHTML=g.info;draw();
+}
+/* ovládání */
+function ui(){
+ var c=$("ctl");c.innerHTML="";
+ DEF[mode].forEach(function(d){
+  var k=d[0],lab=T(d[1]),ty=d[2],r=document.createElement("div"),id="i_"+k,e;r.className="row";
+  if(ty=="chk"){r.innerHTML='<label><input type="checkbox" id="'+id+'"'+(v[k]?" checked":"")+"> "+lab+"</label>";r.firstChild.firstChild.onchange=function(ev){v[k]=ev.target.checked?1:0;update()}}
+  else{
+   r.innerHTML='<label for="n_'+k+'">'+lab+'</label><input type="range" min="'+d[2]+'" max="'+d[3]+'" step="'+d[4]+'" value="'+v[k]+'"><input type="number" id="n_'+k+'" min="'+d[2]+'" max="'+d[3]+'" step="'+d[4]+'" value="'+v[k]+'">';
+   var a=r.children[1],b=r.children[2];
+   a.oninput=function(){b.value=a.value;v[k]=+a.value;update()};
+   b.oninput=function(){if(b.value!==""&&!isNaN(+b.value)){a.value=b.value;v[k]=+b.value;update()}};
+  }
+  c.appendChild(r);
+ });
+}
+function lbl(){
+ $("sub").textContent=T(29);$("hint").textContent=T(30);$("bStl").textContent=T(20);$("bPng").textContent=T(21);
+ document.documentElement.lang=lang;
+}
+$("lg").value=lang;$("lg").onchange=function(){lang=$("lg").value;lbl();ui();update()};
+$("th").onclick=function(){var d=document.documentElement,c=d.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.dataset.theme=c=="dark"?"light":"dark";draw()};
+var drag=null,pts={},pd=0;
+view.addEventListener("pointerdown",function(e){view.setPointerCapture(e.pointerId);pts[e.pointerId]=e;drag={x:e.clientX,y:e.clientY}});
+view.addEventListener("pointermove",function(e){
+ if(!pts[e.pointerId])return;pts[e.pointerId]=e;var k=Object.keys(pts);
+ if(k.length==2){var d=Math.hypot(pts[k[0]].clientX-pts[k[1]].clientX,pts[k[0]].clientY-pts[k[1]].clientY);if(pd)dist=Math.min(900,Math.max(20,dist*pd/d));pd=d;draw();return}
+ th-=(e.clientX-drag.x)*.008;ph=Math.min(3,Math.max(.1,ph-(e.clientY-drag.y)*.008));drag={x:e.clientX,y:e.clientY};draw();
+});
+function up(e){delete pts[e.pointerId];pd=0}
+view.addEventListener("pointerup",up);view.addEventListener("pointercancel",up);
+view.addEventListener("wheel",function(e){e.preventDefault();dist=Math.min(900,Math.max(20,dist*(1+e.deltaY*.001)));draw()},{passive:false});
+window.addEventListener("resize",draw);
+/* export */
+function stl(){
+ var A=cur().P.map(function(p){return p.a}),n=0,o=84;A.forEach(function(a){n+=a.length/9});
+ var buf=new ArrayBuffer(84+n*50),dv=new DataView(buf);dv.setUint32(80,n,true);
+ A.forEach(function(a){for(var i=0;i<a.length;i+=9){
+  var ux=a[i+3]-a[i],uy=a[i+4]-a[i+1],uz=a[i+5]-a[i+2],wx=a[i+6]-a[i],wy=a[i+7]-a[i+1],wz=a[i+8]-a[i+2];
+  var nx=uy*wz-uz*wy,ny=uz*wx-ux*wz,nz=ux*wy-uy*wx,l=Math.hypot(nx,ny,nz)||1;
+  [nx/l,ny/l,nz/l].concat(Array.prototype.slice.call(a,i,i+9)).forEach(function(x,j){dv.setFloat32(o+j*4,x,true)});o+=50}});
+ return buf;
+}
+var crcT=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc(u){var c=-1;for(var i=0;i<u.length;i++)c=crcT[(c^u[i])&255]^(c>>>8);return(c^-1)>>>0}
+function zip(name,buf){
+ var d=new Uint8Array(buf),nm=new TextEncoder().encode(name),cr=crc(d),L=30+nm.length,C2=46+nm.length,o=new ArrayBuffer(L+d.length+C2+22),dv=new DataView(o),u=new Uint8Array(o);
+ dv.setUint32(0,0x04034b50,true);dv.setUint16(4,20,true);dv.setUint32(14,cr,true);dv.setUint32(18,d.length,true);dv.setUint32(22,d.length,true);dv.setUint16(26,nm.length,true);u.set(nm,30);u.set(d,L);
+ var c=L+d.length;dv.setUint32(c,0x02014b50,true);dv.setUint16(c+4,20,true);dv.setUint16(c+6,20,true);dv.setUint32(c+16,cr,true);dv.setUint32(c+20,d.length,true);dv.setUint32(c+24,d.length,true);dv.setUint16(c+28,nm.length,true);u.set(nm,c+46);
+ var e=c+C2;dv.setUint32(e,0x06054b50,true);dv.setUint16(e+8,1,true);dv.setUint16(e+10,1,true);dv.setUint32(e+12,C2,true);dv.setUint32(e+16,c,true);return o;
+}
+async function save(n,e,d){
+ var c=null;try{if(window.claude&&window.claude.use)c=await window.claude.use("downloads")}catch(x){}
+ if(c){try{await c.save(e=="stl"?{filename:n+".zip",data:zip(n+".stl",d)}:{filename:n+"."+e,data:d})}catch(x){}return}
+ var a=document.createElement("a");a.href=URL.createObjectURL(d instanceof Blob?d:new Blob([d]));a.download=n+"."+e;document.body.appendChild(a);a.click();a.remove();
+}
+$("bStl").onclick=function(){save("krabicka","stl",stl())};
+$("bPng").onclick=function(){draw();R.domElement.toBlob(function(b){save("skica-krabicka","png",b)})};
+lbl();ui();update(1);
+})();
+</script>
+</body>
+</html>
