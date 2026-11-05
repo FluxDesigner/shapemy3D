@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=IBM+Plex+Sans:wght@400;500&display=swap">
 <style>
 :root{--bg:#e8edf2;--panel:#f6f8fa;--ink:#17212b;--mute:#5b6b7a;--line:#c5ced7;--acc:#0a5fd6;--accink:#fff;--box:#2f6fd0;--lid:#e0833a;--scene:#dfe6ed;--grid:#b4c0cc;--ins:#2e9d6f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#26313b;--ins:#5cc79a}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#26313b;--ins:#5cc79a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#7a8ea3;--ins:#5cc79a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12171c;--panel:#1a2128;--ink:#e6edf3;--mute:#8d9cab;--line:#2b3641;--acc:#5b9bff;--accink:#071526;--box:#4f8ee8;--lid:#f0a060;--scene:#0e1317;--grid:#7a8ea3;--ins:#5cc79a}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.45 "IBM Plex Sans",system-ui,sans-serif}
@@ -17,6 +17,23 @@ h1{font:700 26px/1.1 "Bricolage Grotesque",system-ui,sans-serif;margin:0}
 #sub{flex:1 1 100%;margin:0;color:var(--mute)}
 .sp{flex:1}
 select,input[type=text],input[type=number]{padding:5px 6px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:4px;font:inherit}
+header label{color:var(--mute);font-size:14px}
+#presec{padding:10px 20px 0}
+#preh{font:700 16px "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 8px}
+.pre{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--scene);display:block}
+.card div{padding:8px 10px 4px;font-size:13px;color:var(--mute);flex:1}
+.card b{display:block;color:var(--ink);font-size:15px}
+.card .cb{display:flex;gap:6px;padding:4px 10px 10px;flex:0}
+.card button{padding:6px 8px;font-size:13px;flex:1}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:8px 20px 0}
+.tabs button{background:transparent;color:var(--ink);border-color:var(--line)}
+.tabs button.on{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.crow{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:10px}
+.crow>label{font-weight:500;flex:1 1 100%}
+.crow .col{display:flex;gap:6px;align-items:center;font-weight:400;flex:0 0 auto}
+input[type=color]{width:34px;height:28px;padding:0;border:1px solid var(--line);border-radius:4px;background:none}
 main{display:flex;flex-wrap:wrap;gap:16px;padding:12px 20px 24px}
 #view{flex:2 1 420px;min-height:340px;height:min(62vh,560px);background:var(--scene);border:1px solid var(--line);border-radius:6px;position:relative;touch-action:none;cursor:grab}
 #view canvas{display:block;width:100%;height:100%}
@@ -38,7 +55,9 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 </head>
 <body>
 <div class="top"><span>Created by <strong>Flux_Designer</strong>. If you enjoy this tool, please support my work:</span><a href="https://makerworld.com/cs/@Flux_Designer" target="_blank" rel="noopener">MakerWorld</a><a href="https://www.crealitycloud.com/user/2345283632/model" target="_blank" rel="noopener">Creality Cloud</a></div>
-<header><h1>shapemy3D</h1><span class="sp"></span><select id="lg" aria-label="Language"><option value="cs">Čeština</option><option value="en">English</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option></select><button id="th" class="alt" aria-label="Theme">◐</button><p id="sub"></p></header>
+<header><h1>shapemy3D</h1><span class="sp"></span><label for="lg" id="lgl"></label><select id="lg" aria-label="Language"><option value="cs">Čeština</option><option value="en">English</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option></select><label for="un" id="unl"></label><select id="un"><option value="mm">mm</option><option value="in">inch</option></select><button id="th" class="alt" aria-label="Theme">◐</button><p id="sub"></p></header>
+<div class="tabs"><button id="tbox"></button><button id="torg"></button></div>
+<section id="presec"><h2 id="preh"></h2><div id="pre" class="pre"></div></section>
 <main>
 <div id="view"><span id="hint"></span></div>
 <aside><div id="ctl"></div><div class="info" id="info"></div>
@@ -48,14 +67,14 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 <script>
 (function(){
 var LG={
-cs:"Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Pant print-in-place|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka",
-en:"Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set the dimensions, check the 3D view and download the STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment",
-de:"Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach",
-es:"Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta las medidas, revisa el 3D y descarga el STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento",
-fr:"Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment"};
+cs:"Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Pant print-in-place|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka|Bez pantu (samostatné víko)|Jeden pant|Dva panty|Zaoblení rohů (mm)|Generátor krabiček|Generátor organizéru na psací potřeby|Válec|Krychle|Kvádr|Průměr (mm)|Strana (mm)|Úkos horní hrany (mm)|Barvy|Tělo|Víko|Vložka|Jazyk|Jednotky|Počet přihrádek|Rozměry jsou příliš malé.|Malá krabička|Šperkovnice|Velká krabice|Plochá krabička|Kelímek na tužky|Stolní organizér|Krychlový stojánek|Kulatý s přihrádkami|Hotové modely|Upravit|Vroubkování|Žádné|Oblé|Čtvercové|Směr vroubků|Svisle|Vodorovně|Šířka vroubku (mm)|Rozteč vroubků (mm)|Výška vroubku (mm)",
+en:"Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set the dimensions, check the 3D view and download the STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment|No hinge (separate lid)|One hinge|Two hinges|Corner radius (mm)|Box generator|Pen organizer generator|Cylinder|Cube|Cuboid|Diameter (mm)|Side (mm)|Top chamfer (mm)|Colors|Body|Lid|Insert|Language|Units|Number of compartments|Dimensions too small.|Small box|Jewelry box|Large box|Flat case|Pencil cup|Desk organizer|Cube holder|Round caddy|Ready-made models|Edit|Fluting|None|Rounded|Square|Flute direction|Vertical|Horizontal|Flute width (mm)|Flute spacing (mm)|Flute height (mm)",
+de:"Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach|Kein Scharnier (loser Deckel)|Ein Scharnier|Zwei Scharniere|Eckenradius (mm)|Boxen-Generator|Stiftehalter-Generator|Zylinder|Würfel|Quader|Durchmesser (mm)|Seite (mm)|Kantenfase oben (mm)|Farben|Körper|Deckel|Einsatz|Sprache|Einheiten|Anzahl der Fächer|Maße zu klein.|Kleine Box|Schmuckkästchen|Große Box|Flache Dose|Stiftebecher|Schreibtisch-Organizer|Würfelhalter|Runder Organizer|Fertige Modelle|Bearbeiten|Riffelung|Keine|Gerundet|Eckig|Riffelrichtung|Senkrecht|Waagerecht|Riffelbreite (mm)|Riffelabstand (mm)|Riffelhöhe (mm)",
+es:"Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta las medidas, revisa el 3D y descarga el STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento|Sin bisagra (tapa suelta)|Una bisagra|Dos bisagras|Radio de esquinas (mm)|Generador de cajas|Generador de organizador de lápices|Cilindro|Cubo|Prisma|Diámetro (mm)|Lado (mm)|Chaflán superior (mm)|Colores|Cuerpo|Tapa|Inserto|Idioma|Unidades|Número de compartimentos|Medidas demasiado pequeñas.|Caja pequeña|Joyero|Caja grande|Caja plana|Vaso para lápices|Organizador de escritorio|Soporte cúbico|Organizador redondo|Modelos listos|Editar|Estriado|Ninguno|Redondeado|Cuadrado|Dirección del estriado|Vertical|Horizontal|Ancho del estriado (mm)|Separación (mm)|Altura del estriado (mm)",
+fr:"Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment|Sans charnière (couvercle séparé)|Une charnière|Deux charnières|Rayon des coins (mm)|Générateur de boîtes|Générateur de pot à crayons|Cylindre|Cube|Pavé|Diamètre (mm)|Côté (mm)|Chanfrein supérieur (mm)|Couleurs|Corps|Couvercle|Insert|Langue|Unités|Nombre de compartiments|Dimensions trop petites.|Petite boîte|Boîte à bijoux|Grande boîte|Boîte plate|Pot à crayons|Organiseur de bureau|Support cubique|Organiseur rond|Modèles prêts|Modifier|Cannelures|Aucune|Arrondies|Carrées|Direction des cannelures|Verticale|Horizontale|Largeur des cannelures (mm)|Espacement (mm)|Hauteur des cannelures (mm)"};
 var lang=(navigator.language||"cs").slice(0,2);if(!LG[lang])lang="cs";
-var mode="box",v={w:60,d:40,h:30,t:2,f:2,lt:2,lh:4,c:0.25,hg:1,ins:1,cols:2,rows:2,dt:1.2,ic:.3,ih:20};
-var DEF={box:[["w",2,20,200,1],["d",3,20,200,1],["h",4,10,120,1],["t",5,1,6,.2],["f",6,1,6,.2],["lt",7,1,6,.2],["lh",8,2,12,.5],["c",9,0,1,.05],["hg",10,"chk"],["ins",31,"chk"],["cols",32,1,8,1],["rows",33,1,8,1],["dt",34,.8,3,.2],["ic",35,0,1,.05],["ih",36,5,100,1]]};
+var unit="mm",K=1,col={},mode="box",v={w:60,d:40,h:30,t:2,f:2,lt:2,lh:4,c:0.25,hg:1,fl:0,fo:0,fw:2,fp:4,fd:.8,os:2,ow:80,od:60,oh:100,ot:3,of:3,orr:6,och:1.5,oins:1,ocols:3,orows:2,odt:1.5,oic:.4,oih:60,rr:3,ins:1,cols:2,rows:2,dt:1.2,ic:.3,ih:20};
+var DEF={box:[["w",2,20,200,1],["d",3,20,200,1],["h",4,10,120,1],["rr",41,0,25,1],["t",5,1,6,.2],["f",6,1,6,.2],["lt",7,1,6,.2],["lh",8,2,12,.5],["c",9,0,1,.05],["hg",10,"sel",[38,39,40]],["ins",31,"chk"],["cols",32,1,8,1],["rows",33,1,8,1],["dt",34,.8,3,.2],["ic",35,0,1,.05],["ih",36,5,100,1]]};
 function T(i){return LG[lang].split("|")[i]}
 var $=function(i){return document.getElementById(i)};
 /* geometrie */
@@ -65,47 +84,129 @@ function ex(pts,d,hole){var s=new THREE.Shape(pts.map(function(p){return new THR
 function cir(x,y,r,n){var p=[];for(var k=0;k<n;k++){var a=k/n*6.28318;p.push([x+r*Math.cos(a),y+r*Math.sin(a)])}return p}
 function mv(a,f){var o=new Float32Array(a.length);for(var i=0;i<a.length;i+=3){var p=f(a[i],a[i+1],a[i+2]);o[i]=p[0];o[i+1]=p[1];o[i+2]=p[2]}return o}
 function mx(a,x0){return mv(a,function(X,Y,Z){return[x0+Z,Y,-X]})}
+function rr(x0,y0,x1,y1,R){var p=[],n=8,k;R=Math.max(0,Math.min(R,(x1-x0)/2,(y1-y0)/2));
+ if(R<.01)return[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+ [[x1-R,y0+R,-1.5708],[x1-R,y1-R,0],[x0+R,y1-R,1.5708],[x0+R,y0+R,3.14159]].forEach(function(c){for(k=0;k<=n;k++){var a=c[2]+k/n*1.5708;p.push([c[0]+R*Math.cos(a),c[1]+R*Math.sin(a)])}});return p}
+function tz(a,dz){return mv(a,function(x,y,z){return[x,y,z+dz]})}
 function boxParts(){
- var W=v.w,D=v.d,H=v.h,t=v.t,f=v.f,lt=v.lt,lh=v.lh,c=v.c,lw=Math.max(1,t*.75),r=3,hg=v.hg,oy=hg?D+2*r:0,ox=hg?0:W+10;
- var B=[[0,0,0,W,D,f],[0,0,f,W,t,H],[0,D-t,f,W,D,H],[0,t,f,t,D-t,H],[W-t,t,f,W,D-t,H]];
+ var W=v.w,D=v.d,H=v.h,t=v.t,f=v.f,lt=v.lt,lh=v.lh,c=v.c,lw=Math.max(1,t*.75),r=3,hg=v.hg,R=Math.max(0,Math.min(v.rr,Math.min(W,D)/2-1)),
+ oy=hg?D+2*r:0,ox=hg?0:W+10,Rc=Math.max(0,R-t),Rl=Math.max(0,R-t-c),xs=Math.max(4,R+1),zone=W-2*xs;
  var x0=ox+t+c,x1=ox+W-t-c,y0=oy+t+c,y1=oy+D-t-c;
- var Ld=[[ox,oy,0,ox+W,oy+D,lt],[x0,y0,lt,x1,y0+lw,lt+lh],[x0,y1-lw,lt,x1,y1,lt+lh],[x0,y0+lw,lt,x0+lw,y1-lw,lt+lh],[x1-lw,y0+lw,lt,x1,y1-lw,lt+lh]];
- var ok=(x1-x0)>2*lw+1&&(y1-y0)>2*lw+1&&H>f+1&&(!hg||(W>=24&&H+lt>=8));
- var P=[{a:bx(B),k:0},{a:bx(Ld),k:1}];
- if(hg&&ok){
-  var za=(H+lt)/2,ya=D+r,rp=1.2,rh=rp+Math.max(Math.min(c,.6),.25),gx=.5+c,span=W-8,sl=(span-2*gx)/3,xs=[4,4+sl+gx,4+2*(sl+gx)];
-  var bk=[bx([[xs[0],D,0,xs[0]+sl,D+r,za],[xs[2],D,0,xs[2]+sl,D+r,za]]),mx(ex(cir(-za,ya,r,24),sl),xs[0]),mx(ex(cir(-za,ya,r,24),sl),xs[2]),mx(ex(cir(-za,ya,rp,16),span),4)];
-  bk.forEach(function(a){P.push({a:a,k:0})});
-  P.push({a:mx(ex(cir(-za,ya,r,24),sl,cir(-za,ya,rh,20)),xs[1]),k:1});
-  P.push({a:bx([[xs[1],ya+rh+.3,0,xs[1]+sl,D+2*r,za]]),k:1});
+ var ok=(x1-x0)>2*lw+1&&(y1-y0)>2*lw+1&&H>f+1&&(!hg||(zone>=(hg==2?36:16)&&H+lt>=8));
+ var E=[],P=[{a:ex(rr(0,0,W,D,R),f),k:0},{a:ex(rr(ox,oy,ox+W,oy+D,R),lt),k:1}];
+ if(ok){
+  P.push({a:tz(ex(rr(0,0,W,D,R),H-f,rr(t,t,W-t,D-t,Rc)),f),k:0});
+  P.push({a:tz(ex(rr(x0,y0,x1,y1,Rl),lh,rr(x0+lw,y0+lw,x1-lw,y1-lw,Math.max(0,Rl-lw))),lt),k:1});
  }
- var inf="";
+ if(hg&&ok){
+  var za=(H+lt)/2,ya=D+r,rp=1.2,rh=rp+Math.max(Math.min(c,.6),.25),gx=.5+c,uw=Math.min(20,(zone-8)/2),
+  U=hg==2?[[xs,uw],[W-xs-uw,uw]]:[[xs,zone]];E=U.map(function(u){return[u[0]-1.5,u[0]+u[1]+1.5]});
+  U.forEach(function(u){var sl=(u[1]-2*gx)/3,a=u[0],X=[a,a+sl+gx,a+2*(sl+gx)];
+   P.push({a:bx([[X[0],D,0,X[0]+sl,D+r,za],[X[2],D,0,X[2]+sl,D+r,za]]),k:0});
+   [0,2].forEach(function(i){P.push({a:mx(ex(cir(-za,ya,r,24),sl),X[i]),k:0})});
+   P.push({a:mx(ex(cir(-za,ya,rp,16),u[1]),a),k:0});
+   P.push({a:mx(ex(cir(-za,ya,r,24),sl,cir(-za,ya,rh,20)),X[1]),k:1});
+   P.push({a:bx([[X[1],ya+rh+.3,0,X[1]+sl,D+2*r,za]]),k:1});
+  });
+ }
+ if(ok)ribs(P,{W:W,D:D,R:R,z0:f+1.5,z1:H-1.5,E:E});var inf="";
  if(v.ins&&ok){
-  var ic=v.ic,dt=v.dt,ix=W-2*t-2*ic,iy=D-2*t-2*ic,ihe=Math.min(v.ih,H-f-lh),fi=1.2,px=hg?W+10:2*W+20,py=0,n=v.cols,m=v.rows,cw=(ix-(n+1)*dt)/n,ch=(iy-(m+1)*dt)/m;
+  var ic=v.ic,dt=v.dt,ix=W-2*t-2*ic,iy=D-2*t-2*ic,ihe=Math.min(v.ih,H-f-lh),fi=1.2,px=hg?W+10:2*W+20,py=0,n=v.cols,m=v.rows,cw=(ix-(n+1)*dt)/n,ch=(iy-(m+1)*dt)/m,Ri=Math.max(0,R-t-ic);
   if(cw<3||ch<3||ihe<fi+3)ok=false;
   else{
-   var I=[[px,py,0,px+ix,py+iy,fi],[px,py,fi,px+ix,py+dt,ihe],[px,py+iy-dt,fi,px+ix,py+iy,ihe],[px,py+dt,fi,px+dt,py+iy-dt,ihe],[px+ix-dt,py+dt,fi,px+ix,py+iy-dt,ihe]],i,j,xx,yy,xb;
+   var I=[],i,j,xx,yy,xb;
    for(i=1;i<n;i++){xx=px+dt+i*cw+(i-1)*dt;I.push([xx,py+dt,fi,xx+dt,py+iy-dt,ihe])}
    for(i=1;i<m;i++){yy=py+dt+i*ch+(i-1)*dt;for(j=0;j<n;j++){xb=px+dt+j*(cw+dt);I.push([xb,yy,fi,xb+cw,yy+dt,ihe])}}
-   P.push({a:bx(I),k:2});
-   inf="<br>"+T(37)+": "+cw.toFixed(1)+" × "+ch.toFixed(1)+" × "+(ihe-fi).toFixed(1)+" mm";
+   P.push({a:ex(rr(px,py,px+ix,py+iy,Ri),fi),k:2});
+   P.push({a:tz(ex(rr(px,py,px+ix,py+iy,Ri),ihe-fi,rr(px+dt,py+dt,px+ix-dt,py+iy-dt,Math.max(0,Ri-dt))),fi),k:2});
+   if(I.length)P.push({a:bx(I),k:2});
+   inf="<br>"+T(37)+": "+F(cw)+" × "+F(ch)+" × "+F(ihe-fi)+" "+unit;
   }
  }
- return{P:P,info:ok?T(22)+": "+(W-2*t).toFixed(1)+" × "+(D-2*t).toFixed(1)+" × "+(H-f).toFixed(1)+" mm"+inf:'<span class="warn">'+T(23)+"</span>"};
+ return{P:P,info:ok?T(22)+": "+F(W-2*t)+" × "+F(D-2*t)+" × "+F(H-f)+" "+unit+inf:'<span class="warn">'+T(23)+"</span>"};
 }
-function cur(){return boxParts()}
+function orgParts(){
+ var s=v.os,W=v.ow,D=s==2?v.od:W,H=s==1?W:v.oh,t=v.ot,f=v.of,R=s==0?0:Math.max(0,Math.min(v.orr,Math.min(W,D)/2-1)),
+ ch=Math.max(0,Math.min(v.och,t-.4,H-f-1)),Rd=W/2,P=[],ok=W-2*t>6&&D-2*t>6&&H>f+5,inf="",q,N=8;
+ function sh(i){return s==0?cir(Rd,Rd,Rd-i,48):rr(i,i,W-i,D-i,R-i)}
+ P.push({a:ex(sh(0),f),k:0});
+ if(ok){
+  P.push({a:tz(ex(sh(0),H-ch-f,sh(t)),f),k:0});
+  if(ch>.05)for(q=0;q<N;q++)P.push({a:tz(ex(sh(ch*(q+.5)/N),ch/N,sh(t)),H-ch+q*ch/N),k:0});
+  ribs(P,{cy:s==0,Rd:Rd,W:W,D:D,R:R,z0:f+1.5,z1:H-ch-1.5,E:[]});if(v.oins){
+   var ic=v.oic,dt=v.odt,ihe=Math.min(v.oih,H-f),fi=1.2,px=W+10,py=0,n=v.ocols,i,j;
+   if(s==0){
+    var Ro=Rd-t-ic,cx=px+Rd;
+    if(Ro-dt<6||ihe<fi+3)ok=false;
+    else{
+     P.push({a:ex(cir(cx,Rd,Ro,40),fi),k:2});
+     P.push({a:tz(ex(cir(cx,Rd,Ro,40),ihe-fi,cir(cx,Rd,Ro-dt,40)),fi),k:2});
+     for(i=0;i<n;i++){var an=i*6.28318/n,co=Math.cos(an),si=Math.sin(an),L=Ro-dt+.3;
+      P.push({a:tz(ex([[0,-dt/2],[L,-dt/2],[L,dt/2],[0,dt/2]].map(function(p){return[cx+p[0]*co-p[1]*si,Rd+p[0]*si+p[1]*co]}),ihe-fi),fi),k:2})}
+     inf="<br>"+T(56)+": "+n;
+    }
+   }else{
+    var ix=W-2*t-2*ic,iy=D-2*t-2*ic,m=v.orows,cw=(ix-(n+1)*dt)/n,chh=(iy-(m+1)*dt)/m,Ri=Math.max(0,R-t-ic),I=[],xx,yy,xb;
+    if(cw<3||chh<3||ihe<fi+3)ok=false;
+    else{
+     for(i=1;i<n;i++){xx=px+dt+i*cw+(i-1)*dt;I.push([xx,py+dt,fi,xx+dt,py+iy-dt,ihe])}
+     for(i=1;i<m;i++){yy=py+dt+i*chh+(i-1)*dt;for(j=0;j<n;j++){xb=px+dt+j*(cw+dt);I.push([xb,yy,fi,xb+cw,yy+dt,ihe])}}
+     P.push({a:ex(rr(px,py,px+ix,py+iy,Ri),fi),k:2});
+     P.push({a:tz(ex(rr(px,py,px+ix,py+iy,Ri),ihe-fi,rr(px+dt,py+dt,px+ix-dt,py+iy-dt,Math.max(0,Ri-dt))),fi),k:2});
+     if(I.length)P.push({a:bx(I),k:2});
+     inf="<br>"+T(37)+": "+F(cw)+" × "+F(chh)+" × "+F(ihe-fi)+" "+unit;
+    }
+   }
+  }
+ }
+ return{P:P,info:ok?(s==0?"⌀ "+F(W-2*t)+" × "+F(H-f):F(W-2*t)+" × "+F(D-2*t)+" × "+F(H-f))+" "+unit+inf:'<span class="warn">'+T(57)+"</span>"};
+}
+function ribItems(){var A=[["fl",68,"sel",[69,70,71]]];if(v.fl)A.push(["fo",72,"sel",[73,74]],["fw",75,.8,8,.2],["fp",76,1.5,20,.5],["fd",77,.3,3,.1]);return A}
+function mv2(a,f,fl){var o=mv(a,f);if(fl)for(var i=0;i<o.length;i+=9)for(var j=0;j<3;j++){var t=o[i+3+j];o[i+3+j]=o[i+6+j];o[i+6+j]=t}return o}
+function pos(a,b,w,p){var L=b-a,n=Math.floor((L-w)/p)+1,o=[],i;if(L<w||n<1)return o;var s=a+(L-((n-1)*p+w))/2+w/2;for(i=0;i<n;i++)o.push(s+i*p);return o}
+function ivl(a,b,E){var r=[[a,b]];E.forEach(function(e){var n=[];r.forEach(function(q){if(e[1]<=q[0]||e[0]>=q[1])n.push(q);else{if(e[0]>q[0])n.push([q[0],e[0]]);if(e[1]<q[1])n.push([e[1],q[1]])}});r=n});return r}
+function rpl(rd,w,d){var p=[],i,a;if(!rd)return[[-w/2,-.2],[w/2,-.2],[w/2,d],[-w/2,d]];for(i=0;i<=10;i++){a=i/10*Math.PI;p.push([w/2*Math.cos(a),d*Math.sin(a)])}p.push([-w/2,-.2],[w/2,-.2]);return p}
+function ribs(P,g){
+ if(!v.fl)return;
+ var w=v.fw,pt=Math.max(v.fp,w+.4),d=v.fd,rd=v.fl==1,hz=v.fo==1,z0=g.z0,z1=g.z1,pl=rpl(rd,w,d),W=g.W,D=g.D,R=g.R||0,Rd=g.Rd;
+ if(z1-z0<w+1)return;
+ function add(a){P.push({a:a,k:0})}
+ if(g.cy){
+  if(!hz){var n=Math.max(3,Math.floor(6.28318*Rd/pt)),i;for(i=0;i<n;i++){var th=i*6.28318/n,cs=Math.cos(th),sn=Math.sin(th);
+   add(tz(ex(pl.map(function(q){return[Rd+(Rd+q[1])*cs-q[0]*sn,Rd+(Rd+q[1])*sn+q[0]*cs]}),z1-z0),z0))}}
+  else pos(z0,z1,w,pt).forEach(function(zc){
+   if(!rd)add(tz(ex(cir(Rd,Rd,Rd+d,48),w,cir(Rd,Rd,Rd-.2,48)),zc-w/2));
+   else for(var j=0;j<6;j++){var u=(j+.5)/3-1;add(tz(ex(cir(Rd,Rd,Rd+d*Math.sqrt(1-u*u),48),w/6,cir(Rd,Rd,Rd-.2,48)),zc-w/2+j*w/6))}});
+  return;
+ }
+ [["y",-1,R+1,W-R-1,[]],["y",1,R+1,W-R-1,g.E||[]],["x",-1,R+1,D-R-1,[]],["x",1,R+1,D-R-1,[]]].forEach(function(f){
+  var ax=f[0],sg=f[1];
+  if(!hz)pos(f[2],f[3],w,pt).forEach(function(c){
+   if(f[4].some(function(e){return c+w/2>e[0]&&c-w/2<e[1]}))return;
+   add(tz(ex(pl.map(function(q){return ax=="y"?[c+q[0],sg<0?-q[1]:D+q[1]]:[sg<0?-q[1]:W+q[1],c+q[0]]}),z1-z0),z0));
+  });
+  else pos(z0,z1,w,pt).forEach(function(zc){
+   ivl(f[2],f[3],f[4]).forEach(function(s){
+    if(s[1]-s[0]<2)return;
+    var a=ex(pl.map(function(q){return[q[1],q[0]]}),s[1]-s[0]);
+    add(mv2(a,function(A,B,Z){return ax=="y"?[s[0]+Z,sg<0?-A:D+A,zc+B]:[sg<0?-A:W+A,s[0]+Z,zc+B]},(ax=="y"&&sg<0)||(ax=="x"&&sg>0)));
+   });
+  });
+ });
+}
+function cur(){return mode=="box"?boxParts():orgParts()}
 /* 3D náhled */
 var view=$("view"),R=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}),S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,1,3000);
 C.up.set(0,0,1);view.insertBefore(R.domElement,view.firstChild);
 S.add(new THREE.HemisphereLight(0xffffff,0x667788,.75));var dl=new THREE.DirectionalLight(0xffffff,.7);dl.position.set(1,-1.5,2);S.add(dl);
-var mBox=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mLid=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mIns=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),meshes=[],grid=new THREE.GridHelper(600,60);
+var mBox=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mLid=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),mIns=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),meshes=[],grid=new THREE.GridHelper(600,60,0xffffff,0xffffff);
 grid.rotation.x=Math.PI/2;grid.position.z=-.05;S.add(grid);
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 var th=-1.2,ph=1.0,dist=180,tgt=new THREE.Vector3();
 function draw(){
  var w=view.clientWidth,h=view.clientHeight;
  if(R.domElement.width!==Math.round(w*devicePixelRatio)){R.setPixelRatio(devicePixelRatio);R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix()}
- R.setClearColor(css("--scene"));mBox.color.set(css("--box"));mLid.color.set(css("--lid"));mIns.color.set(css("--ins"));grid.material.color.set(css("--grid"));
+ R.setClearColor(css("--scene"));mBox.color.set(col.b||css("--box"));mLid.color.set(col.l||css("--lid"));mIns.color.set(col.i||css("--ins"));grid.material.color.set(css("--grid"));
  C.position.set(tgt.x+dist*Math.sin(ph)*Math.cos(th),tgt.y+dist*Math.sin(ph)*Math.sin(th),tgt.z+dist*Math.cos(ph));C.lookAt(tgt);R.render(S,C);
 }
 function update(fit){
@@ -121,26 +222,92 @@ function update(fit){
  $("info").innerHTML=g.info;draw();
 }
 /* ovládání */
+function U(s){return s.replace("mm",unit)}
+function F(x){return(x/K).toFixed(K>1?2:1)}
+function orgItems(){var s=v.os,A=[["os",13,"sel",[44,45,46]]];
+ if(s==0)A.push(["ow",47,30,150,1]);else if(s==1)A.push(["ow",48,30,150,1]);else A.push(["ow",2,20,200,1],["od",3,20,200,1]);
+ if(s!=1)A.push(["oh",4,20,250,1]);
+ A.push(["ot",5,1.2,8,.2],["of",6,1,8,.2]);
+ if(s>0)A.push(["orr",41,0,40,1]);
+ A.push(["och",49,0,6,.5],["oins",31,"chk"],["ocols",s?32:56,s?1:2,8,1]);
+ if(s>0)A.push(["orows",33,1,8,1]);
+ A.push(["odt",34,.8,3,.2],["oic",35,0,1,.05],["oih",36,10,240,1]);return A.concat(ribItems())}
+function hex(x){return/^#[0-9a-f]{6}$/i.test(x)?x:"#888888"}
 function ui(){
  var c=$("ctl");c.innerHTML="";
- DEF[mode].forEach(function(d){
-  var k=d[0],lab=T(d[1]),ty=d[2],r=document.createElement("div"),id="i_"+k,e;r.className="row";
+ (mode=="box"?DEF.box.concat(ribItems()):orgItems()).forEach(function(d){
+  var k=d[0],lab=U(T(d[1])),ty=d[2],r=document.createElement("div"),id="i_"+k,e;r.className="row";
   if(ty=="chk"){r.innerHTML='<label><input type="checkbox" id="'+id+'"'+(v[k]?" checked":"")+"> "+lab+"</label>";r.firstChild.firstChild.onchange=function(ev){v[k]=ev.target.checked?1:0;update()}}
+  else if(ty=="sel"){r.innerHTML='<label for="'+id+'">'+lab+'</label><select id="'+id+'">'+d[3].map(function(n,i){return'<option value="'+i+'"'+(v[k]==i?" selected":"")+">"+T(n)+"</option>"}).join("")+"</select>";e=r.children[1];e.onchange=function(){v[k]=+e.value;ui();update(k=="os")}}
   else{
-   r.innerHTML='<label for="n_'+k+'">'+lab+'</label><input type="range" min="'+d[2]+'" max="'+d[3]+'" step="'+d[4]+'" value="'+v[k]+'"><input type="number" id="n_'+k+'" min="'+d[2]+'" max="'+d[3]+'" step="'+d[4]+'" value="'+v[k]+'">';
+   var at='min="'+d[2]/K+'" max="'+d[3]/K+'" step="'+(+(d[4]/K).toFixed(4))+'" value="'+(+(v[k]/K).toFixed(3))+'"';
+   r.innerHTML='<label for="n_'+k+'">'+lab+'</label><input type="range" '+at+'><input type="number" id="n_'+k+'" '+at+'>';
    var a=r.children[1],b=r.children[2];
-   a.oninput=function(){b.value=a.value;v[k]=+a.value;update()};
-   b.oninput=function(){if(b.value!==""&&!isNaN(+b.value)){a.value=b.value;v[k]=+b.value;update()}};
+   a.oninput=function(){b.value=a.value;v[k]=+a.value*K;update()};
+   b.oninput=function(){if(b.value!==""&&!isNaN(+b.value)){a.value=b.value;v[k]=+b.value*K;update()}};
   }
   c.appendChild(r);
  });
+ var cd=document.createElement("div");cd.className="crow";cd.innerHTML="<label>"+T(50)+"</label>";
+ [["b",51,"--box"],["l",52,"--lid"],["i",53,"--ins"]].forEach(function(q){
+  if(q[0]=="l"&&mode!="box")return;
+  var w=document.createElement("label"),i=document.createElement("input");w.className="col";i.type="color";i.value=col[q[0]]||hex(css(q[2]));
+  i.oninput=function(){col[q[0]]=i.value;draw()};w.appendChild(i);w.appendChild(document.createTextNode(T(q[1])));cd.appendChild(w);
+ });
+ c.appendChild(cd);
 }
 function lbl(){
- $("sub").textContent=T(29);$("hint").textContent=T(30);$("bStl").textContent=T(20);$("bPng").textContent=T(21);
+ $("tbox").textContent=T(42);$("torg").textContent=T(43);$("tbox").className=mode=="box"?"on":"";$("torg").className=mode=="org"?"on":"";$("lgl").textContent=T(54)+":";$("unl").textContent=T(55)+":";$("preh").textContent=T(66);$("sub").textContent=T(29);$("hint").textContent=T(30);$("bStl").textContent=T(20);$("bPng").textContent=T(21);
  document.documentElement.lang=lang;
 }
-$("lg").value=lang;$("lg").onchange=function(){lang=$("lg").value;lbl();ui();update()};
-$("th").onclick=function(){var d=document.documentElement,c=d.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.dataset.theme=c=="dark"?"light":"dark";draw()};
+var V0=Object.assign({},v),preOn=true,thumbs={};
+var PRE={box:[
+ {n:58,p:{w:50,d:35,h:25,hg:1,rr:3,lh:3,ins:0}},
+ {n:59,p:{w:80,d:60,h:30,hg:1,rr:6,ins:1,cols:3,rows:2,dt:1.2,ic:.3,ih:20}},
+ {n:60,p:{w:100,d:70,h:40,hg:2,rr:5,ins:0}},
+ {n:61,p:{w:90,d:60,h:20,hg:0,rr:8,ins:0}}],
+org:[
+ {n:62,p:{os:0,ow:80,oh:100,och:1.5,oins:0}},
+ {n:63,p:{os:2,ow:120,od:80,oh:100,orr:6,och:1.5,oins:1,ocols:3,orows:2}},
+ {n:64,p:{os:1,ow:80,orr:8,och:2,oins:0}},
+ {n:65,p:{os:0,ow:100,oh:110,och:2,oins:1,ocols:4}}]};
+function withP(pp,fn){var o=v;v=pp;try{return fn()}finally{v=o}}
+function desc(){return mode=="box"?F(v.w)+" × "+F(v.d)+" × "+F(v.h)+" "+unit+(v.hg?" · "+T(38+v.hg):"")+(v.ins?" · "+v.cols+"×"+v.rows:""):T(44+v.os)+" · "+(v.os==0?"⌀"+F(v.ow)+" × "+F(v.oh):v.os==1?F(v.ow):F(v.ow)+" × "+F(v.od)+" × "+F(v.oh))+" "+unit+(v.oins?" · "+v.ocols+(v.os?"×"+v.orows:""):"")}
+var TS=new THREE.Scene(),TC=new THREE.PerspectiveCamera(35,4/3,1,3000);TC.up.set(0,0,1);
+TS.add(new THREE.HemisphereLight(0xffffff,0x667788,.75));var tl=new THREE.DirectionalLight(0xffffff,.7);tl.position.set(1,-1.5,2);TS.add(tl);
+function thumb(pp){
+ var g=withP(pp,cur),mn=[1e9,1e9,1e9],mx=[-1e9,-1e9,-1e9],ms=[];
+ mBox.color.set(css("--box"));mLid.color.set(css("--lid"));mIns.color.set(css("--ins"));
+ g.P.forEach(function(q){
+  var geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.BufferAttribute(q.a,3));geo.computeVertexNormals();
+  var m=new THREE.Mesh(geo,q.k==2?mIns:q.k?mLid:mBox);TS.add(m);ms.push(m);
+  for(var i=0;i<q.a.length;i++){var j=i%3;if(q.a[i]<mn[j])mn[j]=q.a[i];if(q.a[i]>mx[j])mx[j]=q.a[i]}
+ });
+ var cx=(mn[0]+mx[0])/2,cy=(mn[1]+mx[1])/2,cz=(mn[2]+mx[2])/2,d=Math.max(mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2])*1.7;
+ TC.position.set(cx+.55*d,cy-d,cz+.75*d);TC.lookAt(cx,cy,cz);
+ R.setPixelRatio(1);R.setSize(240,180,false);R.setClearColor(css("--scene"));R.render(TS,TC);
+ var url=R.domElement.toDataURL("image/png");
+ ms.forEach(function(m){TS.remove(m);m.geometry.dispose()});
+ return url;
+}
+function showPre(){
+ var el=$("pre");el.innerHTML="";$("presec").hidden=!preOn;if(!preOn)return;
+ PRE[mode].forEach(function(q,i){
+  var pp=Object.assign({},V0,q.p),key=mode+i+css("--scene"),card=document.createElement("div");card.className="card";
+  if(!thumbs[key])thumbs[key]=thumb(pp);
+  card.innerHTML='<img alt="" src="'+thumbs[key]+'"><div><b>'+T(q.n)+"</b>"+withP(pp,desc)+'</div><div class="cb"><button class="alt">'+T(67)+"</button><button>STL</button></div>";
+  var b=card.querySelectorAll("button");
+  b[0].onclick=function(){Object.assign(v,pp);ui();update(1);view.scrollIntoView({behavior:"smooth",block:"center"})};
+  b[1].onclick=function(){save((mode=="box"?"krabicka-":"organizer-")+(i+1),"stl",withP(pp,stl))};
+  el.appendChild(card);
+ });
+ draw();
+}
+function setMode(m,tg){if(tg&&mode==m)preOn=!preOn;else preOn=true;mode=m;lbl();ui();update(1);showPre()}
+$("tbox").onclick=function(){setMode("box",1)};$("torg").onclick=function(){setMode("org",1)};
+$("un").onchange=function(){unit=$("un").value;K=unit=="in"?25.4:1;ui();update();showPre()};
+$("lg").value=lang;$("lg").onchange=function(){lang=$("lg").value;lbl();ui();update();showPre()};
+$("th").onclick=function(){var d=document.documentElement,c=d.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");d.dataset.theme=c=="dark"?"light":"dark";draw();showPre()};
 var drag=null,pts={},pd=0;
 view.addEventListener("pointerdown",function(e){view.setPointerCapture(e.pointerId);pts[e.pointerId]=e;drag={x:e.clientX,y:e.clientY}});
 view.addEventListener("pointermove",function(e){
@@ -175,9 +342,9 @@ async function save(n,e,d){
  if(c){try{await c.save(e=="stl"?{filename:n+".zip",data:zip(n+".stl",d)}:{filename:n+"."+e,data:d})}catch(x){}return}
  var a=document.createElement("a");a.href=URL.createObjectURL(d instanceof Blob?d:new Blob([d]));a.download=n+"."+e;document.body.appendChild(a);a.click();a.remove();
 }
-$("bStl").onclick=function(){save("krabicka","stl",stl())};
-$("bPng").onclick=function(){draw();R.domElement.toBlob(function(b){save("skica-krabicka","png",b)})};
-lbl();ui();update(1);
+$("bStl").onclick=function(){save(mode=="box"?"krabicka":"organizer","stl",stl())};
+$("bPng").onclick=function(){draw();R.domElement.toBlob(function(b){save("skica-"+mode,"png",b)})};
+lbl();setMode("box");
 })();
 </script>
 </body>
