@@ -472,6 +472,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
     <button id="tvase"></button>
     <button id="tlamp"></button>
     <button id="tdesk"></button>
+    <button id="tdrw"></button>
   </div>
 </div>
 
@@ -498,11 +499,11 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 <script>
 (function(){
 var LG = {
-cs: "Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Print-in-place pant|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka|Bez pantu (samostatné víko)|Jeden pant|Dva panty|Zaoblení rohů (mm)|Generátor krabiček|Generátor organizéru|Válec|Krychle|Kvádr|Průměr (mm)|Strana (mm)|Úkos horní hrany (mm)|Barvy|Tělo|Víko|Vložka|Jazyk|Jednotky|Počet přihrádek|Rozměry jsou příliš malé.|Malá krabička|Šperkovnice|Velká krabice|Plochá krabička|Kelímek na tužky|Stolní organizér|Krychlový stojánek|Kulatý s přihrádkami|Přednastavené modely|Upravit|Vroubkování|Žádné|Oblé|Čtvercové|Směr vroubků|Svisle|Vodorovně|Šířka vroubku (mm)|Rozteč vroubků (mm)|Výška vroubku (mm)|Krabička s vroubky|Pruhovaná krabice|Vroubkovaný kelímek|Žebrovaný organizér|Generátor váz|Generátor lamp|Průměr základny (mm)|Max. průměr (mm)|Tvar těla|Tloušťka stěny (mm)|Počet vln/žeber|Hloubka vlnění (mm)|Spirálové zkroucení (°)|Dekorativní povrch|Minimalistická váza|Vlnitá váza|Spirálová váza|Žebrovaná váza|Geometrická váza|Hladký|Vlnitý|Žebrovaný|Diamantový|Průměr stínidla (mm)|Velikost otvorů (mm)|Hustota vzoru|Typ geometrického vzoru|Vzor stínidla|Moderní geometrická lampa|Vlnitá lampa|Žebrovaná lampa|Organická lampa|Perforovaná lampa|Mřížka|Soustředný|Organické buňky|Upozornění: Tento model stínidla je určen výhradně pro nízkoteplotní LED světelné zdroje (LED žárovky nebo LED pásky). Nepoužívejte s klasickými žárovkami, které produkují vysoké teplo!|Rovný|Soudkovitý|Kuželový|Přesýpací hodiny|Kapka|S-křivka|Tři panty|Krabička na drobnosti|Krabička na paměťové karty|Vysoký stojánek na pera|Nízká zásuvková přihrádka|Organická S-váza|Široká spirálová mísa|Perforovaná válcová lampa|Spirálová ambientní lampa|Hladké stínování v náhledu|Spirálový|Perforace|Organický|Cik-cak|Stolní organizér|Šířka papírků (mm)|Hloubka papírků (mm)|Vůle papírků (mm)|Šířka pravé části (mm)|Fach na obálky (mm)|Šířka na nůžky (mm)|Počet kapes na tužky|Výška stěn na papírky (mm)|Výška přední stěny fachu (mm)|Výřez pro prsty (mm)|Na papírky 95 × 95|Kompaktní|Velký pracovní|Platby na očích",
-en: "Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set dimensions, check 3D view and download STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment|No hinge (separate lid)|One hinge|Two hinges|Corner radius (mm)|Box Generator|Organizer Generator|Cylinder|Cube|Cuboid|Diameter (mm)|Side (mm)|Top chamfer (mm)|Colors|Body|Lid|Insert|Language|Units|Number of compartments|Dimensions too small.|Small box|Jewelry box|Large box|Flat case|Pencil cup|Desk organizer|Cube holder|Round caddy|Presets|Edit|Fluting|None|Rounded|Square|Flute direction|Vertical|Horizontal|Flute width (mm)|Flute spacing (mm)|Flute height (mm)|Fluted box|Ribbed case|Fluted cup|Ribbed organizer|Vase generator|Lamp generator|Base diameter (mm)|Max diameter (mm)|Body shape|Wall thickness (mm)|Waves/ribs count|Wave depth (mm)|Spiral twist (°)|Surface texture|Minimalist vase|Wavy vase|Spiral vase|Ribbed vase|Geometric vase|Smooth|Wavy|Ribbed|Diamond|Shade diameter (mm)|Hole size (mm)|Pattern density|Geometric pattern type|Shade pattern|Modern geometric lamp|Wavy lamp|Ribbed lamp|Organic lamp|Perforated lamp|Grid|Concentric|Organic cells|Notice: This lamp shade is designed exclusively for low-temperature LED light sources (LED bulbs or LED strips). Do not use with traditional incandescent bulbs producing high heat!|Straight|Bulging|Conical|Hourglass|Teardrop|S-Curve|Three hinges|Small parts box|Memory card box|Tall pen holder|Low drawer tray|Organic S-vase|Wide spiral bowl|Perforated cylinder lamp|Spiral ambient lamp|Smooth shading in preview|Spiral|Perforated|Organic|Zig-zag|Desk organizer|Note width (mm)|Note depth (mm)|Note clearance (mm)|Right section width (mm)|Envelope slot (mm)|Scissors slot (mm)|Number of pen cups|Notes tray wall height (mm)|Envelope slot front height (mm)|Finger notch (mm)|For 95 × 95 notes|Compact|Large workstation|Payments in sight",
-de: "Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach|Kein Scharnier (loser Deckel)|Ein Scharnier|Zwei Scharniere|Eckenradius (mm)|Boxen-Generator|Organizer-Generator|Zylinder|Würfel|Quader|Durchmesser (mm)|Seite (mm)|Kantenfase oben (mm)|Farben|Körper|Deckel|Einsatz|Sprache|Einheiten|Anzahl der Fächer|Maße zu klein.|Kleine Box|Schmuckkästchen|Große Box|Flache Dose|Stiftebecher|Schreibtisch-Organizer|Würfelhalter|Runder Organizer|Vorlagen|Bearbeiten|Riffelung|Keine|Gerundet|Eckig|Riffelrichtung|Senkrecht|Waagerecht|Riffelbreite (mm)|Riffelabstand (mm)|Riffelhöhe (mm)|Gerillte Box|Geriffelte Dose|Gerillter Becher|Geriffelter Organizer|Vasen-Generator|Lampen-Generator|Basisdurchmesser (mm)|Max. Durchmesser (mm)|Körperform|Wandstärke (mm)|Wellen-/Rippenanzahl|Wellentiefe (mm)|Spiraldrehung (°)|Oberflächenstruktur|Minimalistische Vase|Wellen-Vase|Spiral-Vase|Gerippte Vase|Geometrische Vase|Glatt|Wellig|Gerippt|Diamant|Schirmdurchmesser (mm)|Lochgröße (mm)|Musterdichte|Geometrischer Mustertyp|Schirmmuster|Moderne Geometrie-Lampe|Wellen-Lampe|Gerippte Lampe|Organische Lampe|Perforierte Lampe|Gitter|Konzentrisch|Organische Zellen|Hinweis: Dieser Lampenschirm ist ausschließlich für Niedertemperatur-LED-Leuchtmittel entwickelt. Nicht mit klassischen Glühlampen verwenden!|Gerade|Bauchig|Konisch|Sanduhr|Tropfen|S-Kurve|Drei Scharniere|Kleinteile-Box|Speicherkarten-Box|Hoher Stiftehalter|Flache Schubladenschale|Organische S-Vase|Breite Spiralschale|Zylinderlampe mit Lochmuster|Spiral-Stimmungsleuchte|Weiche Schattierung in der Vorschau|Spirale|Perforiert|Organisch|Zickzack|Schreibtisch-Organizer|Zettelbreite (mm)|Zetteltiefe (mm)|Spiel Zettel (mm)|Breite rechter Bereich (mm)|Briefumschlagfach (mm)|Scherenfach (mm)|Anzahl Stiftebecher|Wandhöhe Zettelfach (mm)|Vorderwandhöhe Briefumschlagfach (mm)|Fingeraussparung (mm)|Für Zettel 95 × 95|Kompakt|Großer Arbeitsplatz|Zahlungen im Blick",
-es: "Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta medidas, revisa 3D y descarga STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento|Sin bisagra (tapa suelta)|Una bisagra|Dos bisagras|Radio de esquinas (mm)|Generador de Cajas|Generador de Organizadores|Cilindro|Cubo|Prisma|Diámetro (mm)|Lado (mm)|Chaflán superior (mm)|Colores|Cuerpo|Tapa|Inserto|Idioma|Unidades|Número de compartimentos|Medidas demasiado pequeñas.|Caja pequeña|Joyero|Caja grande|Caja plana|Vaso para lápices|Organizador de escritorio|Soporte cúbico|Organizador redondo|Modelos predefinidos|Editar|Estriado|Ninguno|Redondeado|Cuadrado|Dirección del estriado|Vertical|Horizontal|Ancho del estriado (mm)|Separación (mm)|Altura del estriado (mm)|Caja estriada|Caja acanalada|Vaso estriado|Organizador acanalado|Generador de jarrones|Generador de lámparas|Diámetro de la base (mm)|Diámetro máx (mm)|Forma del cuerpo|Grosor de pared (mm)|Nº de ondas/nervios|Profundidad de onda (mm)|Torsión espiral (°)|Textura superficial|Jarrón minimalista|Jarrón ondulado|Jarrón en espiral|Jarrón acanalado|Jarrón geométrico|Liso|Ondulado|Acanalado|Diamante|Diámetro pantalla (mm)|Tamaño de orificios (mm)|Densidad de patrón|Tipo patrón geométrico|Patrón pantalla|Lámpara geométrica|Lámpara ondulada|Lámpara acanalada|Lámpara orgánica|Lámpara perforada|Rejilla|Concéntrico|Células orgánicas|Aviso: Esta pantalla está diseñada exclusivamente para fuentes LED de baja temperatura. ¡No usar con bombillas incandescentes!|Recto|Abombado|Cónico|Reloj de arena|Gota|Curva S|Tres bisagras|Caja para piezas pequeñas|Caja para tarjetas de memoria|Portalápices alto|Bandeja baja para cajón|Jarrón orgánico en S|Cuenco espiral ancho|Lámpara cilíndrica perforada|Lámpara ambiental en espiral|Sombreado suave en la vista previa|Espiral|Perforado|Orgánico|Zigzag|Organizador de escritorio|Ancho de las notas (mm)|Fondo de las notas (mm)|Holgura de notas (mm)|Ancho de la parte derecha (mm)|Compartimento para sobres (mm)|Ranura para tijeras (mm)|Número de vasos para lápices|Altura de paredes de notas (mm)|Altura frontal de sobres (mm)|Muesca para dedos (mm)|Para notas de 95 × 95|Compacto|Escritorio grande|Pagos a la vista",
-fr: "Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment|Sans charnière (couvercle séparé)|Une charnière|Deux charnières|Rayon des coins (mm)|Générateur de Boîtes|Générateur d’organiseurs|Cylindre|Cube|Pavé|Diamètre (mm)|Côté (mm)|Chanfrein supérieur (mm)|Couleurs|Corps|Couvercle|Insert|Langue|Unités|Nombre de compartiments|Dimensions trop petites.|Petite boîte|Boîte à bijoux|Grande boîte|Boîte plate|Pot à crayons|Organiseur de bureau|Support cubique|Organiseur rond|Modèles prêts|Modifier|Cannelures|Aucune|Arrondies|Carrées|Direction des cannelures|Verticale|Horizontale|Largeur des cannelures (mm)|Espacement (mm)|Hauteur des cannelures (mm)|Boîte cannelée|Boîte nervurée|Pot cannelé|Organiseur nervuré|Générateur de vases|Générateur de lampes|Diamètre de la base (mm)|Diamètre max (mm)|Forme du corps|Épaisseur de paroi (mm)|Nombre d’ondes/nervures|Profondeur d'onde (mm)|Torsion spirale (°)|Texture de surface|Vase minimaliste|Vase ondulé|Vase spiralé|Vase nervuré|Vase géométrique|Lisse|Ondulé|Nervuré|Diamant|Diamètre de l’abat-jour (mm)|Taille des trous (mm)|Densité du motif|Type de motif géométrique|Motif abat-jour|Lampe géométrique|Lampe ondulée|Lampe nervurée|Lampe organique|Lampe perforée|Grille|Concentrique|Cellules organiques|Avertissement : Cet abat-jour est conçu exclusivement pour des sources lumineuses LED basse température. Ne pas utiliser avec des ampoules à incandescence !|Droit|Bombé|Conique|Sablier|Goutte|Courbe S|Trois charnières|Boîte pour petites pièces|Boîte pour cartes mémoire|Grand pot à crayons|Plateau bas de tiroir|Vase organique en S|Grand bol spiralé|Lampe cylindrique perforée|Lampe d’ambiance en spirale|Ombrage doux dans l’aperçu|Spirale|Perforé|Organique|Zigzag|Organiseur de bureau|Largeur des notes (mm)|Profondeur des notes (mm)|Jeu des notes (mm)|Largeur de la partie droite (mm)|Compartiment enveloppes (mm)|Fente ciseaux (mm)|Nombre de pots à crayons|Hauteur des parois des notes (mm)|Hauteur avant du compartiment enveloppes (mm)|Encoche pour les doigts (mm)|Pour notes de 95 × 95|Compact|Grand poste de travail|Paiements bien visibles"
+cs: "Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Print-in-place pant|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka|Bez pantu (samostatné víko)|Jeden pant|Dva panty|Zaoblení rohů (mm)|Generátor krabiček|Generátor organizéru|Válec|Krychle|Kvádr|Průměr (mm)|Strana (mm)|Úkos horní hrany (mm)|Barvy|Tělo|Víko|Vložka|Jazyk|Jednotky|Počet přihrádek|Rozměry jsou příliš malé.|Malá krabička|Šperkovnice|Velká krabice|Plochá krabička|Kelímek na tužky|Stolní organizér|Krychlový stojánek|Kulatý s přihrádkami|Přednastavené modely|Upravit|Vroubkování|Žádné|Oblé|Čtvercové|Směr vroubků|Svisle|Vodorovně|Šířka vroubku (mm)|Rozteč vroubků (mm)|Výška vroubku (mm)|Krabička s vroubky|Pruhovaná krabice|Vroubkovaný kelímek|Žebrovaný organizér|Generátor váz|Generátor lamp|Průměr základny (mm)|Max. průměr (mm)|Tvar těla|Tloušťka stěny (mm)|Počet vln/žeber|Hloubka vlnění (mm)|Spirálové zkroucení (°)|Dekorativní povrch|Minimalistická váza|Vlnitá váza|Spirálová váza|Žebrovaná váza|Geometrická váza|Hladký|Vlnitý|Žebrovaný|Diamantový|Průměr stínidla (mm)|Velikost otvorů (mm)|Hustota vzoru|Typ geometrického vzoru|Vzor stínidla|Moderní geometrická lampa|Vlnitá lampa|Žebrovaná lampa|Organická lampa|Perforovaná lampa|Mřížka|Soustředný|Organické buňky|Upozornění: Tento model stínidla je určen výhradně pro nízkoteplotní LED světelné zdroje (LED žárovky nebo LED pásky). Nepoužívejte s klasickými žárovkami, které produkují vysoké teplo!|Rovný|Soudkovitý|Kuželový|Přesýpací hodiny|Kapka|S-křivka|Tři panty|Krabička na drobnosti|Krabička na paměťové karty|Vysoký stojánek na pera|Nízká zásuvková přihrádka|Organická S-váza|Široká spirálová mísa|Perforovaná válcová lampa|Spirálová ambientní lampa|Hladké stínování v náhledu|Spirálový|Perforace|Organický|Cik-cak|Stolní organizér|Šířka papírků (mm)|Hloubka papírků (mm)|Vůle papírků (mm)|Šířka pravé části (mm)|Fach na obálky (mm)|Šířka na nůžky (mm)|Počet kapes na tužky|Výška stěn na papírky (mm)|Výška přední stěny fachu (mm)|Výřez pro prsty (mm)|Na papírky 95 × 95|Kompaktní|Velký pracovní|Platby na očích|Vložka do šuplíku|Šířka šuplíku (mm)|Hloubka šuplíku (mm)|Poměr prvního sloupce|Výška přepážek (%)|Příborník 3 × 2|Dílenský šuplík 4 × 3|Kufřík se širokou přihrádkou|Plochá vložka na drobnosti|Rozdělit na díly (větší než podložka)|Šířka podložky (mm)|Tloušťka stěny u spoje (mm)|Počet kolíků na spoj|Průměr kolíku (mm)",
+en: "Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set dimensions, check 3D view and download STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment|No hinge (separate lid)|One hinge|Two hinges|Corner radius (mm)|Box Generator|Organizer Generator|Cylinder|Cube|Cuboid|Diameter (mm)|Side (mm)|Top chamfer (mm)|Colors|Body|Lid|Insert|Language|Units|Number of compartments|Dimensions too small.|Small box|Jewelry box|Large box|Flat case|Pencil cup|Desk organizer|Cube holder|Round caddy|Presets|Edit|Fluting|None|Rounded|Square|Flute direction|Vertical|Horizontal|Flute width (mm)|Flute spacing (mm)|Flute height (mm)|Fluted box|Ribbed case|Fluted cup|Ribbed organizer|Vase generator|Lamp generator|Base diameter (mm)|Max diameter (mm)|Body shape|Wall thickness (mm)|Waves/ribs count|Wave depth (mm)|Spiral twist (°)|Surface texture|Minimalist vase|Wavy vase|Spiral vase|Ribbed vase|Geometric vase|Smooth|Wavy|Ribbed|Diamond|Shade diameter (mm)|Hole size (mm)|Pattern density|Geometric pattern type|Shade pattern|Modern geometric lamp|Wavy lamp|Ribbed lamp|Organic lamp|Perforated lamp|Grid|Concentric|Organic cells|Notice: This lamp shade is designed exclusively for low-temperature LED light sources (LED bulbs or LED strips). Do not use with traditional incandescent bulbs producing high heat!|Straight|Bulging|Conical|Hourglass|Teardrop|S-Curve|Three hinges|Small parts box|Memory card box|Tall pen holder|Low drawer tray|Organic S-vase|Wide spiral bowl|Perforated cylinder lamp|Spiral ambient lamp|Smooth shading in preview|Spiral|Perforated|Organic|Zig-zag|Desk organizer|Note width (mm)|Note depth (mm)|Note clearance (mm)|Right section width (mm)|Envelope slot (mm)|Scissors slot (mm)|Number of pen cups|Notes tray wall height (mm)|Envelope slot front height (mm)|Finger notch (mm)|For 95 × 95 notes|Compact|Large workstation|Payments in sight|Drawer insert|Drawer width (mm)|Drawer depth (mm)|First column ratio|Divider height (%)|Cutlery tray 3 × 2|Workshop drawer 4 × 3|Case with wide section|Flat small-parts tray|Split into parts (larger than bed)|Print bed width (mm)|Seam wall thickness (mm)|Pins per seam|Pin diameter (mm)",
+de: "Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach|Kein Scharnier (loser Deckel)|Ein Scharnier|Zwei Scharniere|Eckenradius (mm)|Boxen-Generator|Organizer-Generator|Zylinder|Würfel|Quader|Durchmesser (mm)|Seite (mm)|Kantenfase oben (mm)|Farben|Körper|Deckel|Einsatz|Sprache|Einheiten|Anzahl der Fächer|Maße zu klein.|Kleine Box|Schmuckkästchen|Große Box|Flache Dose|Stiftebecher|Schreibtisch-Organizer|Würfelhalter|Runder Organizer|Vorlagen|Bearbeiten|Riffelung|Keine|Gerundet|Eckig|Riffelrichtung|Senkrecht|Waagerecht|Riffelbreite (mm)|Riffelabstand (mm)|Riffelhöhe (mm)|Gerillte Box|Geriffelte Dose|Gerillter Becher|Geriffelter Organizer|Vasen-Generator|Lampen-Generator|Basisdurchmesser (mm)|Max. Durchmesser (mm)|Körperform|Wandstärke (mm)|Wellen-/Rippenanzahl|Wellentiefe (mm)|Spiraldrehung (°)|Oberflächenstruktur|Minimalistische Vase|Wellen-Vase|Spiral-Vase|Gerippte Vase|Geometrische Vase|Glatt|Wellig|Gerippt|Diamant|Schirmdurchmesser (mm)|Lochgröße (mm)|Musterdichte|Geometrischer Mustertyp|Schirmmuster|Moderne Geometrie-Lampe|Wellen-Lampe|Gerippte Lampe|Organische Lampe|Perforierte Lampe|Gitter|Konzentrisch|Organische Zellen|Hinweis: Dieser Lampenschirm ist ausschließlich für Niedertemperatur-LED-Leuchtmittel entwickelt. Nicht mit klassischen Glühlampen verwenden!|Gerade|Bauchig|Konisch|Sanduhr|Tropfen|S-Kurve|Drei Scharniere|Kleinteile-Box|Speicherkarten-Box|Hoher Stiftehalter|Flache Schubladenschale|Organische S-Vase|Breite Spiralschale|Zylinderlampe mit Lochmuster|Spiral-Stimmungsleuchte|Weiche Schattierung in der Vorschau|Spirale|Perforiert|Organisch|Zickzack|Schreibtisch-Organizer|Zettelbreite (mm)|Zetteltiefe (mm)|Spiel Zettel (mm)|Breite rechter Bereich (mm)|Briefumschlagfach (mm)|Scherenfach (mm)|Anzahl Stiftebecher|Wandhöhe Zettelfach (mm)|Vorderwandhöhe Briefumschlagfach (mm)|Fingeraussparung (mm)|Für Zettel 95 × 95|Kompakt|Großer Arbeitsplatz|Zahlungen im Blick|Schubladeneinsatz|Schubladenbreite (mm)|Schubladentiefe (mm)|Verhältnis erste Spalte|Trennwandhöhe (%)|Besteckkasten 3 × 2|Werkstattschublade 4 × 3|Koffer mit breitem Fach|Flache Kleinteileschale|In Teile teilen (größer als Druckbett)|Druckbettbreite (mm)|Wandstärke an der Naht (mm)|Stifte pro Naht|Stiftdurchmesser (mm)",
+es: "Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta medidas, revisa 3D y descarga STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento|Sin bisagra (tapa suelta)|Una bisagra|Dos bisagras|Radio de esquinas (mm)|Generador de Cajas|Generador de Organizadores|Cilindro|Cubo|Prisma|Diámetro (mm)|Lado (mm)|Chaflán superior (mm)|Colores|Cuerpo|Tapa|Inserto|Idioma|Unidades|Número de compartimentos|Medidas demasiado pequeñas.|Caja pequeña|Joyero|Caja grande|Caja plana|Vaso para lápices|Organizador de escritorio|Soporte cúbico|Organizador redondo|Modelos predefinidos|Editar|Estriado|Ninguno|Redondeado|Cuadrado|Dirección del estriado|Vertical|Horizontal|Ancho del estriado (mm)|Separación (mm)|Altura del estriado (mm)|Caja estriada|Caja acanalada|Vaso estriado|Organizador acanalado|Generador de jarrones|Generador de lámparas|Diámetro de la base (mm)|Diámetro máx (mm)|Forma del cuerpo|Grosor de pared (mm)|Nº de ondas/nervios|Profundidad de onda (mm)|Torsión espiral (°)|Textura superficial|Jarrón minimalista|Jarrón ondulado|Jarrón en espiral|Jarrón acanalado|Jarrón geométrico|Liso|Ondulado|Acanalado|Diamante|Diámetro pantalla (mm)|Tamaño de orificios (mm)|Densidad de patrón|Tipo patrón geométrico|Patrón pantalla|Lámpara geométrica|Lámpara ondulada|Lámpara acanalada|Lámpara orgánica|Lámpara perforada|Rejilla|Concéntrico|Células orgánicas|Aviso: Esta pantalla está diseñada exclusivamente para fuentes LED de baja temperatura. ¡No usar con bombillas incandescentes!|Recto|Abombado|Cónico|Reloj de arena|Gota|Curva S|Tres bisagras|Caja para piezas pequeñas|Caja para tarjetas de memoria|Portalápices alto|Bandeja baja para cajón|Jarrón orgánico en S|Cuenco espiral ancho|Lámpara cilíndrica perforada|Lámpara ambiental en espiral|Sombreado suave en la vista previa|Espiral|Perforado|Orgánico|Zigzag|Organizador de escritorio|Ancho de las notas (mm)|Fondo de las notas (mm)|Holgura de notas (mm)|Ancho de la parte derecha (mm)|Compartimento para sobres (mm)|Ranura para tijeras (mm)|Número de vasos para lápices|Altura de paredes de notas (mm)|Altura frontal de sobres (mm)|Muesca para dedos (mm)|Para notas de 95 × 95|Compacto|Escritorio grande|Pagos a la vista|Inserto para cajón|Ancho del cajón (mm)|Fondo del cajón (mm)|Proporción de la primera columna|Altura de divisiones (%)|Cubertero 3 × 2|Cajón de taller 4 × 3|Maletín con sección ancha|Bandeja plana para piezas pequeñas|Dividir en piezas (mayor que la cama)|Ancho de la cama (mm)|Grosor de pared en la unión (mm)|Pasadores por unión|Diámetro del pasador (mm)",
+fr: "Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment|Sans charnière (couvercle séparé)|Une charnière|Deux charnières|Rayon des coins (mm)|Générateur de Boîtes|Générateur d’organiseurs|Cylindre|Cube|Pavé|Diamètre (mm)|Côté (mm)|Chanfrein supérieur (mm)|Couleurs|Corps|Couvercle|Insert|Langue|Unités|Nombre de compartiments|Dimensions trop petites.|Petite boîte|Boîte à bijoux|Grande boîte|Boîte plate|Pot à crayons|Organiseur de bureau|Support cubique|Organiseur rond|Modèles prêts|Modifier|Cannelures|Aucune|Arrondies|Carrées|Direction des cannelures|Verticale|Horizontale|Largeur des cannelures (mm)|Espacement (mm)|Hauteur des cannelures (mm)|Boîte cannelée|Boîte nervurée|Pot cannelé|Organiseur nervuré|Générateur de vases|Générateur de lampes|Diamètre de la base (mm)|Diamètre max (mm)|Forme du corps|Épaisseur de paroi (mm)|Nombre d’ondes/nervures|Profondeur d'onde (mm)|Torsion spirale (°)|Texture de surface|Vase minimaliste|Vase ondulé|Vase spiralé|Vase nervuré|Vase géométrique|Lisse|Ondulé|Nervuré|Diamant|Diamètre de l’abat-jour (mm)|Taille des trous (mm)|Densité du motif|Type de motif géométrique|Motif abat-jour|Lampe géométrique|Lampe ondulée|Lampe nervurée|Lampe organique|Lampe perforée|Grille|Concentrique|Cellules organiques|Avertissement : Cet abat-jour est conçu exclusivement pour des sources lumineuses LED basse température. Ne pas utiliser avec des ampoules à incandescence !|Droit|Bombé|Conique|Sablier|Goutte|Courbe S|Trois charnières|Boîte pour petites pièces|Boîte pour cartes mémoire|Grand pot à crayons|Plateau bas de tiroir|Vase organique en S|Grand bol spiralé|Lampe cylindrique perforée|Lampe d’ambiance en spirale|Ombrage doux dans l’aperçu|Spirale|Perforé|Organique|Zigzag|Organiseur de bureau|Largeur des notes (mm)|Profondeur des notes (mm)|Jeu des notes (mm)|Largeur de la partie droite (mm)|Compartiment enveloppes (mm)|Fente ciseaux (mm)|Nombre de pots à crayons|Hauteur des parois des notes (mm)|Hauteur avant du compartiment enveloppes (mm)|Encoche pour les doigts (mm)|Pour notes de 95 × 95|Compact|Grand poste de travail|Paiements bien visibles|Insert de tiroir|Largeur du tiroir (mm)|Profondeur du tiroir (mm)|Rapport de la première colonne|Hauteur des cloisons (%)|Range-couverts 3 × 2|Tiroir d’atelier 4 × 3|Mallette à grande section|Plateau plat pour petites pièces|Diviser en pièces (plus grand que le plateau)|Largeur du plateau (mm)|Épaisseur de paroi au joint (mm)|Goujons par joint|Diamètre du goujon (mm)"
 };
 
 var lang = (navigator.language || "cs").slice(0, 2);
@@ -520,7 +521,8 @@ var v = {
   // Lamp
   lhght: 140, ld: 80, lwt: 2, lr: 12, lhs: 6, lden: 5, lp: 0, lpt: 0, lsmooth: 1,
   // Desk
-  dnw: 95, dnd: 95, dtol: .6, dwr: 80, des: 14, dsc: 22, dnp: 2, dhh: 110, dhn: 25, dhf: 55, dgn: 30, dwl: 2.4, dfl: 3
+  dnw: 95, dnd: 95, dtol: .6, dwr: 80, des: 14, dsc: 22, dnp: 2, dhh: 110, dhn: 25, dhf: 55, dgn: 30, dwl: 2.4, dfl: 3,
+  xw: 300, xd: 200, xh: 45, xcl: .6, xt: 1.6, xf: 1.6, xc: 3, xr: 2, xk: 1, xdh: 100, xrr: 6, xsp: 0, xbx: 220, xtl: 5, xpn: 2, xpd: 3
 };
 
 var DEF = {
@@ -545,6 +547,7 @@ var DEF = {
 };
 
 DEF.desk = [["dnw",136,40,200,1],["dnd",137,40,200,1],["dtol",138,0,2,.1],["dwr",139,50,150,1],["des",140,6,40,1],["dsc",141,0,50,1],["dnp",142,1,5,1],["dhh",4,40,200,1],["dhn",143,10,100,1],["dhf",144,20,150,1],["dgn",145,0,60,1],["dwl",5,1.2,6,.2],["dfl",6,1,6,.2]];
+DEF.drw = [["xw",151,50,800,1],["xd",152,50,800,1],["xh",4,10,200,1],["xcl",9,0,3,.1],["xt",5,.8,6,.2],["xf",6,.8,6,.2],["xc",32,1,10,1],["xr",33,1,10,1],["xk",153,.5,3,.1],["xdh",154,30,100,5],["xrr",41,0,30,1],["xsp",159,"chk"],["xbx",160,100,500,5],["xtl",161,3,10,.5],["xpn",162,1,6,1],["xpd",163,2,6,.5]];
 function T(i) { return LG[lang].split("|")[i] || ""; }
 var $ = function(i) { return document.getElementById(i); };
 
@@ -613,7 +616,7 @@ function tz(a, dz) {
 function boxParts() {
   var W = v.w, D = v.d, H = v.h, t = v.t, f = v.f, lt = v.lt, lh = v.lh, c = v.c, lw = Math.max(1, t * .75), r = 3, hg = v.hg, R = Math.max(0, Math.min(v.rr, Math.min(W, D) / 2 - 1)),
       oy = hg ? D + 2 * (r + .8) - .3 : 0, ox = hg ? 0 : W + 10, Rc = Math.max(0, R - t), Rl = Math.max(0, R - t - c), xs = Math.max(4, R + 1), zone = W - 2 * xs;
-  var x0 = ox + t + c, x1 = ox + W - t - c, y0 = oy + t + c, y1 = oy + D - t - c;
+  var x0 = ox + t + c, x1 = ox + W - t - c, y0 = hg ? Math.max(oy + t + c, D + 3.8 + Math.sqrt(14.44 + (H - lt) * lh - lh * lh) + 1) : oy + t + c, y1 = oy + D - t - c;
   var ok = (x1 - x0) > 2 * lw + 1 && (y1 - y0) > 2 * lw + 1 && H > f + 1 && (!hg || (zone >= (hg == 1 ? 16 : hg * 12 + (hg - 1) * 8) && H + lt >= 8));
   var E = [], P = [{ a: ex(rr(0, 0, W, D, R), f), k: 0 }, { a: ex(rr(ox, oy, ox + W, oy + D, R), lt), k: 1 }];
   if (ok) {
@@ -951,25 +954,83 @@ function lampParts() {
   };
 }
 
-/* STOLNÍ ORGANIZÉR: papírky vlevo, vpravo fach na obálky, nůžky a kapsy na tužky */
+/* STOLNÍ ORGANIZÉR: papírky vlevo; vpravo vpředu kapsy na tužky, uprostřed nůžky, vzadu fach na obálky */
 function deskParts() {
-  var t = v.dwl, f = v.dfl, hh = v.dhh, hn = Math.min(v.dhn, hh), hf = Math.min(v.dhf, hh), np = Math.max(1, Math.round(v.dnp)),
+  var t = v.dwl, f = v.dfl, hh = v.dhh, hn = Math.min(v.dhn, hh), hf = Math.min(v.dhf, hh), hp = Math.round(hh * .65), np = Math.max(1, Math.round(v.dnp)),
       Nw = v.dnw + 2 * v.dtol, Nd = v.dnd + 2 * v.dtol, Wr = v.dwr, es = v.des, sc = v.dsc, gn = v.dgn,
-      xN = t + Nw, xR = xN + t, W = xR + Wr + t, D = Nd + 2 * t, yd1 = t + es, yp = yd1 + t + (sc > 0 ? sc + t : 0),
-      pcw = (Wr - (np - 1) * t) / np, ok = (D - t - yp) >= 20 && pcw >= 14, B = [], i, xc = xR + Wr / 2;
+      xN = t + Nw, xR = xN + t, W = xR + Wr + t, D = Nd + 2 * t, yS = D - 2 * t - es, yP1 = sc > 0 ? yS - sc - t : yS,
+      pcw = (Wr - (np - 1) * t) / np, ok = (yP1 - t) >= 20 && pcw >= 14, B = [], i, xc = xR + Wr / 2;
   B.push([0, 0, 0, W, D, f]);
   B.push([0, 0, f, t, D, hn], [0, 0, f, xR, t, hn], [0, D - t, f, xR, D, hn]);
   B.push([xN, t, f, xR, D - t, hh]);
-  B.push([xR, D - t, f, W, D, hh], [W - t, 0, f, W, yd1 + t, hf], [W - t, yd1 + t, f, W, D - t, hh]);
-  if (gn > 0 && gn < Wr - 6) B.push([xR, 0, f, xc - gn / 2, t, hf], [xc + gn / 2, 0, f, W - t, t, hf]);
-  else B.push([xR, 0, f, W - t, t, hf]);
-  B.push([xR, yd1, f, W - t, yd1 + t, hh]);
-  if (sc > 0) B.push([xR, yd1 + t + sc, f, W - t, yd1 + 2 * t + sc, hh]);
-  for (i = 1; i < np; i++) { var xx = xR + i * pcw + (i - 1) * t; B.push([xx, yp, f, xx + t, D - t, hh]); }
+  B.push([xR, D - t, f, W, D, hh], [W - t, 0, f, W, D - t, hh], [xR, 0, f, W - t, t, hp]);
+  if (gn > 0 && gn < Wr - 6) B.push([xR, yS, f, xc - gn / 2, yS + t, hf], [xc + gn / 2, yS, f, W - t, yS + t, hf]);
+  else B.push([xR, yS, f, W - t, yS + t, hf]);
+  if (sc > 0) B.push([xR, yP1, f, W - t, yP1 + t, hp]);
+  for (i = 1; i < np; i++) { var xx = xR + i * pcw + (i - 1) * t; B.push([xx, t, f, xx + t, yP1, hp]); }
   return {
     P: ok ? [{ a: bx(B), k: 0 }] : [{ a: bx([[0, 0, 0, 30, 30, 2]]), k: 0 }],
     info: ok ? T(22) + ": " + F(v.dnw) + " × " + F(v.dnd) + " " + unit + "<br>" + F(W) + " × " + F(D) + " × " + F(hh) + " " + unit : '<span class="warn">' + T(57) + "</span>"
   };
+}
+
+/* VLOŽKA DO ŠUPLÍKU / KUFŘÍKU */
+function exH(pts, holes, d) {
+  var s = new THREE.Shape(pts.map(function(p) { return new THREE.Vector2(p[0], p[1]); }));
+  holes.forEach(function(hl) { s.holes.push(new THREE.Path(hl.map(function(p) { return new THREE.Vector2(p[0], p[1]); }))); });
+  return new THREE.ExtrudeGeometry(s, { depth: d, bevelEnabled: false }).attributes.position.array;
+}
+/* Rozdělená vložka: švy jsou dvojité stěny ve směru Y, spojené skrytými kolíky (vidět je jen mezera ve švu) */
+function drawerSplit() {
+  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, n = Math.max(1, Math.round(v.xc)), m = Math.max(1, Math.round(v.xr)),
+      sg = .3, tl = v.xtl, Ts = 2 * tl + sg, hd = f + (H - f) * v.xdh / 100, K = Math.ceil(W / v.xbx) - 1, np = Math.max(1, Math.round(v.xpn)),
+      pr = v.xpd / 2, pl = tl - 2.2, ds = pl + .6, zc = (f + hd) / 2, S = [], i, j, k, g, bad = K >= n;
+  for (k = 1; k <= K; k++) { S.push(Math.max(k, Math.min(n - 1, Math.round(k * n / (K + 1))))); if (k > 1 && S[k - 1] <= S[k - 2]) bad = true; }
+  var tx = [], totTx = 0, dv = [], c0 = [], c1 = [], x = t;
+  for (i = 1; i < n; i++) { tx[i] = S.indexOf(i) >= 0 ? Ts : t; totTx += tx[i]; }
+  var Wi = W - 2 * t - totTx, tot = v.xk + n - 1, rh = (D - 2 * t - (m - 1) * t) / m;
+  for (i = 0; i < n; i++) { c0[i] = x; x += Wi * (i == 0 ? v.xk : 1) / tot; c1[i] = x; if (i < n - 1) { dv[i + 1] = x; x += tx[i + 1]; } }
+  var PR = [], a0 = 0;
+  S.forEach(function(s) { PR.push([a0, dv[s] + tl]); a0 = dv[s] + tl + sg; }); PR.push([a0, W]);
+  var Bp = PR.map(function() { return []; }), M = PR.map(function() { return []; });
+  function add(b) { PR.forEach(function(r, q) { var a = Math.max(b[0], r[0]), c = Math.min(b[3], r[1]); if (c - a > .01) Bp[q].push([a, b[1], b[2], c, b[4], b[5]]); }); }
+  add([0, 0, 0, W, D, f]); add([0, 0, f, W, t, H]); add([0, D - t, f, W, D, H]); add([0, t, f, t, D - t, H]); add([W - t, t, f, W, D - t, H]);
+  var rect = [[t, f], [D - t, f], [D - t, hd], [t, hd]];
+  for (i = 1; i < n; i++) {
+    var xd = dv[i], q = S.indexOf(i);
+    if (q < 0) { add([xd, t, f, xd + t, D - t, hd]); continue; }
+    var ys = [], xb = xd + tl + sg;
+    for (k = 0; k < np; k++) ys.push(t + (k + .5) * (D - 2 * t) / np);
+    Bp[q].push([xd, t, f, xd + tl, D - t, hd]);
+    ys.forEach(function(yy) { M[q].push(mv(ex(cir(yy, zc, pr, 16), 1 + sg + pl), function(X, Y, Z) { return [xd + tl - 1 + Z, X, Y]; })); });
+    M[q + 1].push(mv(exH(rect, ys.map(function(yy) { return cir(yy, zc, pr + .25, 16); }), ds), function(X, Y, Z) { return [xb + Z, X, Y]; }));
+    Bp[q + 1].push([xb + ds, t, f, xd + Ts, D - t, hd]);
+  }
+  for (j = 1; j < m; j++) { var y = t + j * rh + (j - 1) * t; for (i = 0; i < n; i++) add([c0[i], y, f, c1[i], y + t, hd]); }
+  var ok = !bad && Math.min(c1[0] - c0[0], rh) >= 10 && tl >= 4 && hd - f >= 8, P = [];
+  if (ok) PR.forEach(function(r, q) {
+    var dx = q * 14, sh = function(a) { return mv(a, function(X, Y, Z) { return [X + dx, Y, Z]; }); };
+    if (Bp[q].length) P.push({ a: sh(bx(Bp[q])), k: 0 });
+    M[q].forEach(function(a) { P.push({ a: sh(a), k: 0 }); });
+  });
+  else P.push({ a: bx([[0, 0, 0, 30, 30, 2]]), k: 0 });
+  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + (K + 1) + " ×" : '<span class="warn">' + T(57) + "</span>" };
+}
+
+function drawerParts() {
+  if (v.xsp && Math.ceil((v.xw - 2 * v.xcl) / v.xbx) > 1) return drawerSplit();
+  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, n = Math.max(1, Math.round(v.xc)), m = Math.max(1, Math.round(v.xr)),
+      R = Math.max(0, Math.min(v.xrr, Math.min(W, D) / 2 - 1)), tot = v.xk + n - 1, Wi = W - 2 * t - (n - 1) * t, Di = D - 2 * t - (m - 1) * t,
+      hd = f + (H - f) * v.xdh / 100, rh = Di / m, i, j, B = [], P = [], xs = [], x = t, w1 = Wi * v.xk / tot, wo = Wi / tot, ok = Math.min(w1, wo, rh) >= 10 && H > f + 5;
+  P.push({ a: ex(rr(0, 0, W, D, R), f), k: 0 });
+  if (ok) {
+    P.push({ a: tz(ex(rr(0, 0, W, D, R), H - f, rr(t, t, W - t, D - t, Math.max(0, R - t))), f), k: 0 });
+    for (i = 0; i < n; i++) { xs.push([x, x + (i == 0 ? w1 : wo)]); x += (i == 0 ? w1 : wo) + t; }
+    for (i = 1; i < n; i++) B.push([xs[i][0] - t, t, f, xs[i][0], D - t, hd]);
+    for (j = 1; j < m; j++) { var y = t + j * rh + (j - 1) * t; for (i = 0; i < n; i++) B.push([xs[i][0], y, f, xs[i][1], y + t, hd]); }
+    if (B.length) P.push({ a: bx(B), k: 0 });
+  }
+  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + T(37) + ": " + F(w1) + (n > 1 ? " / " + F(wo) : "") + " × " + F(rh) + " " + unit : '<span class="warn">' + T(57) + "</span>" };
 }
 
 function cur() {
@@ -978,6 +1039,7 @@ function cur() {
   if (mode == "vase") return vaseParts();
   if (mode == "lamp") return lampParts();
   if (mode == "desk") return deskParts();
+  if (mode == "drw") return drawerParts();
   return boxParts();
 }
 
@@ -1114,14 +1176,16 @@ function lbl() {
   $("tvase").textContent = T(82);
   $("tlamp").textContent = T(83);
   $("tdesk").textContent = T(135);
+  $("tdrw").textContent = T(150);
 
   $("tbox").className = mode == "box" ? "on" : "";
   $("torg").className = mode == "org" ? "on" : "";
   $("tvase").className = mode == "vase" ? "on" : "";
   $("tlamp").className = mode == "lamp" ? "on" : "";
   $("tdesk").className = mode == "desk" ? "on" : "";
+  $("tdrw").className = mode == "drw" ? "on" : "";
 
-  $("secTitle").textContent = mode == "box" ? T(42) : (mode == "org" ? T(43) : (mode == "vase" ? T(82) : (mode == "desk" ? T(135) : T(83))));
+  $("secTitle").textContent = mode == "box" ? T(42) : (mode == "org" ? T(43) : (mode == "vase" ? T(82) : (mode == "desk" ? T(135) : (mode == "drw" ? T(150) : T(83)))));
 
   $("lgl").textContent = T(54) + ":";
   $("unl").textContent = T(55) + ":";
@@ -1176,6 +1240,12 @@ PRE.desk = [
   { n: 148, p: { dwr: 110, des: 20, dsc: 26, dnp: 3, dhh: 120, dhn: 30, dhf: 60, dgn: 40 } },
   { n: 149, p: { dwr: 90, des: 25, dsc: 0, dnp: 2, dhh: 100, dhf: 45, dgn: 50 } }
 ];
+PRE.drw = [
+  { n: 155, p: { xw: 300, xd: 240, xh: 50, xc: 3, xr: 2, xk: 1.5, xrr: 8 } },
+  { n: 156, p: { xw: 400, xd: 300, xh: 60, xc: 4, xr: 3, xk: 1, xrr: 4 } },
+  { n: 157, p: { xw: 350, xd: 250, xh: 50, xc: 3, xr: 1, xk: 2, xrr: 6 } },
+  { n: 158, p: { xw: 200, xd: 150, xh: 25, xc: 5, xr: 3, xk: 1, xdh: 70, xrr: 3 } }
+];
 function withP(pp, fn) {
   var o = v; v = pp;
   try { return fn(); } finally { v = o; }
@@ -1187,6 +1257,7 @@ function desc() {
   if (mode == "vase") return "H: " + F(v.vh) + " " + unit + " · ⌀ " + F(v.vm) + " " + unit;
   if (mode == "lamp") return "H: " + F(v.lhght) + " " + unit + " · ⌀ " + F(v.ld) + " " + unit;
   if (mode == "desk") return F(v.dnw + 2 * v.dtol + v.dwr + 3 * v.dwl) + " × " + F(v.dnd + 2 * v.dtol + 2 * v.dwl) + " × " + F(v.dhh) + " " + unit;
+  if (mode == "drw") return F(v.xw) + " × " + F(v.xd) + " × " + F(v.xh) + " " + unit + " · " + v.xc + "×" + v.xr;
   return "";
 }
 
@@ -1255,6 +1326,7 @@ $("torg").onclick = function() { setMode("org", 1); };
 $("tvase").onclick = function() { setMode("vase", 1); };
 $("tlamp").onclick = function() { setMode("lamp", 1); };
 $("tdesk").onclick = function() { setMode("desk", 1); };
+$("tdrw").onclick = function() { setMode("drw", 1); };
 
 $("un").onchange = function() { unit = $("un").value; K = unit == "in" ? 25.4 : 1; ui(); update(); showPre(); };
 $("lg").value = lang;
