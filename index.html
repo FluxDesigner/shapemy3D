@@ -428,6 +428,11 @@ button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 3px solid var(--acc);
   outline-offset: 2px;
 }
+#dim{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#vtools{position:absolute;top:10px;left:10px;display:flex;gap:6px;z-index:2}
+#vtools button{padding:4px 10px;font-size:13px}
+#vtools button.on,.laytb button.on{background:var(--acc);color:#fff}
+.laywrap{margin-bottom:14px}.laytb{display:flex;gap:6px;margin-bottom:6px}.laytb button{padding:4px 10px;font-size:13px}
 </style>
 </head>
 <body>
@@ -482,7 +487,7 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 </section>
 
 <main>
-  <div id="view"><span id="hint"></span></div>
+  <div id="view"><canvas id="dim"></canvas><div id="vtools"><button id="bEdge" class="alt"></button><button id="bDim" class="alt"></button></div><span id="hint"></span></div>
   <aside>
     <div class="section-title" id="secTitle"></div>
     <div id="ctl"></div>
@@ -499,11 +504,11 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 <script>
 (function(){
 var LG = {
-cs: "Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Print-in-place pant|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka|Bez pantu (samostatné víko)|Jeden pant|Dva panty|Zaoblení rohů (mm)|Generátor krabiček|Generátor organizéru|Válec|Krychle|Kvádr|Průměr (mm)|Strana (mm)|Úkos horní hrany (mm)|Barvy|Tělo|Víko|Vložka|Jazyk|Jednotky|Počet přihrádek|Rozměry jsou příliš malé.|Malá krabička|Šperkovnice|Velká krabice|Plochá krabička|Kelímek na tužky|Stolní organizér|Krychlový stojánek|Kulatý s přihrádkami|Přednastavené modely|Upravit|Vroubkování|Žádné|Oblé|Čtvercové|Směr vroubků|Svisle|Vodorovně|Šířka vroubku (mm)|Rozteč vroubků (mm)|Výška vroubku (mm)|Krabička s vroubky|Pruhovaná krabice|Vroubkovaný kelímek|Žebrovaný organizér|Generátor váz|Generátor lamp|Průměr základny (mm)|Max. průměr (mm)|Tvar těla|Tloušťka stěny (mm)|Počet vln/žeber|Hloubka vlnění (mm)|Spirálové zkroucení (°)|Dekorativní povrch|Minimalistická váza|Vlnitá váza|Spirálová váza|Žebrovaná váza|Geometrická váza|Hladký|Vlnitý|Žebrovaný|Diamantový|Průměr stínidla (mm)|Velikost otvorů (mm)|Hustota vzoru|Typ geometrického vzoru|Vzor stínidla|Moderní geometrická lampa|Vlnitá lampa|Žebrovaná lampa|Organická lampa|Perforovaná lampa|Mřížka|Soustředný|Organické buňky|Upozornění: Tento model stínidla je určen výhradně pro nízkoteplotní LED světelné zdroje (LED žárovky nebo LED pásky). Nepoužívejte s klasickými žárovkami, které produkují vysoké teplo!|Rovný|Soudkovitý|Kuželový|Přesýpací hodiny|Kapka|S-křivka|Tři panty|Krabička na drobnosti|Krabička na paměťové karty|Vysoký stojánek na pera|Nízká zásuvková přihrádka|Organická S-váza|Široká spirálová mísa|Perforovaná válcová lampa|Spirálová ambientní lampa|Hladké stínování v náhledu|Spirálový|Perforace|Organický|Cik-cak|Stolní organizér|Šířka papírků (mm)|Hloubka papírků (mm)|Vůle papírků (mm)|Šířka pravé části (mm)|Fach na obálky (mm)|Šířka na nůžky (mm)|Počet kapes na tužky|Výška stěn na papírky (mm)|Výška přední stěny fachu (mm)|Výřez pro prsty (mm)|Na papírky 95 × 95|Kompaktní|Velký pracovní|Platby na očích|Vložka do šuplíku|Šířka šuplíku (mm)|Hloubka šuplíku (mm)|Poměr prvního sloupce|Výška přepážek (%)|Příborník 3 × 2|Dílenský šuplík 4 × 3|Kufřík se širokou přihrádkou|Plochá vložka na drobnosti|Rozdělit na díly (větší než podložka)|Šířka podložky (mm)|Tloušťka stěny u spoje (mm)|Počet kolíků na spoj|Průměr kolíku (mm)",
-en: "Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set dimensions, check 3D view and download STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment|No hinge (separate lid)|One hinge|Two hinges|Corner radius (mm)|Box Generator|Organizer Generator|Cylinder|Cube|Cuboid|Diameter (mm)|Side (mm)|Top chamfer (mm)|Colors|Body|Lid|Insert|Language|Units|Number of compartments|Dimensions too small.|Small box|Jewelry box|Large box|Flat case|Pencil cup|Desk organizer|Cube holder|Round caddy|Presets|Edit|Fluting|None|Rounded|Square|Flute direction|Vertical|Horizontal|Flute width (mm)|Flute spacing (mm)|Flute height (mm)|Fluted box|Ribbed case|Fluted cup|Ribbed organizer|Vase generator|Lamp generator|Base diameter (mm)|Max diameter (mm)|Body shape|Wall thickness (mm)|Waves/ribs count|Wave depth (mm)|Spiral twist (°)|Surface texture|Minimalist vase|Wavy vase|Spiral vase|Ribbed vase|Geometric vase|Smooth|Wavy|Ribbed|Diamond|Shade diameter (mm)|Hole size (mm)|Pattern density|Geometric pattern type|Shade pattern|Modern geometric lamp|Wavy lamp|Ribbed lamp|Organic lamp|Perforated lamp|Grid|Concentric|Organic cells|Notice: This lamp shade is designed exclusively for low-temperature LED light sources (LED bulbs or LED strips). Do not use with traditional incandescent bulbs producing high heat!|Straight|Bulging|Conical|Hourglass|Teardrop|S-Curve|Three hinges|Small parts box|Memory card box|Tall pen holder|Low drawer tray|Organic S-vase|Wide spiral bowl|Perforated cylinder lamp|Spiral ambient lamp|Smooth shading in preview|Spiral|Perforated|Organic|Zig-zag|Desk organizer|Note width (mm)|Note depth (mm)|Note clearance (mm)|Right section width (mm)|Envelope slot (mm)|Scissors slot (mm)|Number of pen cups|Notes tray wall height (mm)|Envelope slot front height (mm)|Finger notch (mm)|For 95 × 95 notes|Compact|Large workstation|Payments in sight|Drawer insert|Drawer width (mm)|Drawer depth (mm)|First column ratio|Divider height (%)|Cutlery tray 3 × 2|Workshop drawer 4 × 3|Case with wide section|Flat small-parts tray|Split into parts (larger than bed)|Print bed width (mm)|Seam wall thickness (mm)|Pins per seam|Pin diameter (mm)",
-de: "Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach|Kein Scharnier (loser Deckel)|Ein Scharnier|Zwei Scharniere|Eckenradius (mm)|Boxen-Generator|Organizer-Generator|Zylinder|Würfel|Quader|Durchmesser (mm)|Seite (mm)|Kantenfase oben (mm)|Farben|Körper|Deckel|Einsatz|Sprache|Einheiten|Anzahl der Fächer|Maße zu klein.|Kleine Box|Schmuckkästchen|Große Box|Flache Dose|Stiftebecher|Schreibtisch-Organizer|Würfelhalter|Runder Organizer|Vorlagen|Bearbeiten|Riffelung|Keine|Gerundet|Eckig|Riffelrichtung|Senkrecht|Waagerecht|Riffelbreite (mm)|Riffelabstand (mm)|Riffelhöhe (mm)|Gerillte Box|Geriffelte Dose|Gerillter Becher|Geriffelter Organizer|Vasen-Generator|Lampen-Generator|Basisdurchmesser (mm)|Max. Durchmesser (mm)|Körperform|Wandstärke (mm)|Wellen-/Rippenanzahl|Wellentiefe (mm)|Spiraldrehung (°)|Oberflächenstruktur|Minimalistische Vase|Wellen-Vase|Spiral-Vase|Gerippte Vase|Geometrische Vase|Glatt|Wellig|Gerippt|Diamant|Schirmdurchmesser (mm)|Lochgröße (mm)|Musterdichte|Geometrischer Mustertyp|Schirmmuster|Moderne Geometrie-Lampe|Wellen-Lampe|Gerippte Lampe|Organische Lampe|Perforierte Lampe|Gitter|Konzentrisch|Organische Zellen|Hinweis: Dieser Lampenschirm ist ausschließlich für Niedertemperatur-LED-Leuchtmittel entwickelt. Nicht mit klassischen Glühlampen verwenden!|Gerade|Bauchig|Konisch|Sanduhr|Tropfen|S-Kurve|Drei Scharniere|Kleinteile-Box|Speicherkarten-Box|Hoher Stiftehalter|Flache Schubladenschale|Organische S-Vase|Breite Spiralschale|Zylinderlampe mit Lochmuster|Spiral-Stimmungsleuchte|Weiche Schattierung in der Vorschau|Spirale|Perforiert|Organisch|Zickzack|Schreibtisch-Organizer|Zettelbreite (mm)|Zetteltiefe (mm)|Spiel Zettel (mm)|Breite rechter Bereich (mm)|Briefumschlagfach (mm)|Scherenfach (mm)|Anzahl Stiftebecher|Wandhöhe Zettelfach (mm)|Vorderwandhöhe Briefumschlagfach (mm)|Fingeraussparung (mm)|Für Zettel 95 × 95|Kompakt|Großer Arbeitsplatz|Zahlungen im Blick|Schubladeneinsatz|Schubladenbreite (mm)|Schubladentiefe (mm)|Verhältnis erste Spalte|Trennwandhöhe (%)|Besteckkasten 3 × 2|Werkstattschublade 4 × 3|Koffer mit breitem Fach|Flache Kleinteileschale|In Teile teilen (größer als Druckbett)|Druckbettbreite (mm)|Wandstärke an der Naht (mm)|Stifte pro Naht|Stiftdurchmesser (mm)",
-es: "Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta medidas, revisa 3D y descarga STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento|Sin bisagra (tapa suelta)|Una bisagra|Dos bisagras|Radio de esquinas (mm)|Generador de Cajas|Generador de Organizadores|Cilindro|Cubo|Prisma|Diámetro (mm)|Lado (mm)|Chaflán superior (mm)|Colores|Cuerpo|Tapa|Inserto|Idioma|Unidades|Número de compartimentos|Medidas demasiado pequeñas.|Caja pequeña|Joyero|Caja grande|Caja plana|Vaso para lápices|Organizador de escritorio|Soporte cúbico|Organizador redondo|Modelos predefinidos|Editar|Estriado|Ninguno|Redondeado|Cuadrado|Dirección del estriado|Vertical|Horizontal|Ancho del estriado (mm)|Separación (mm)|Altura del estriado (mm)|Caja estriada|Caja acanalada|Vaso estriado|Organizador acanalado|Generador de jarrones|Generador de lámparas|Diámetro de la base (mm)|Diámetro máx (mm)|Forma del cuerpo|Grosor de pared (mm)|Nº de ondas/nervios|Profundidad de onda (mm)|Torsión espiral (°)|Textura superficial|Jarrón minimalista|Jarrón ondulado|Jarrón en espiral|Jarrón acanalado|Jarrón geométrico|Liso|Ondulado|Acanalado|Diamante|Diámetro pantalla (mm)|Tamaño de orificios (mm)|Densidad de patrón|Tipo patrón geométrico|Patrón pantalla|Lámpara geométrica|Lámpara ondulada|Lámpara acanalada|Lámpara orgánica|Lámpara perforada|Rejilla|Concéntrico|Células orgánicas|Aviso: Esta pantalla está diseñada exclusivamente para fuentes LED de baja temperatura. ¡No usar con bombillas incandescentes!|Recto|Abombado|Cónico|Reloj de arena|Gota|Curva S|Tres bisagras|Caja para piezas pequeñas|Caja para tarjetas de memoria|Portalápices alto|Bandeja baja para cajón|Jarrón orgánico en S|Cuenco espiral ancho|Lámpara cilíndrica perforada|Lámpara ambiental en espiral|Sombreado suave en la vista previa|Espiral|Perforado|Orgánico|Zigzag|Organizador de escritorio|Ancho de las notas (mm)|Fondo de las notas (mm)|Holgura de notas (mm)|Ancho de la parte derecha (mm)|Compartimento para sobres (mm)|Ranura para tijeras (mm)|Número de vasos para lápices|Altura de paredes de notas (mm)|Altura frontal de sobres (mm)|Muesca para dedos (mm)|Para notas de 95 × 95|Compacto|Escritorio grande|Pagos a la vista|Inserto para cajón|Ancho del cajón (mm)|Fondo del cajón (mm)|Proporción de la primera columna|Altura de divisiones (%)|Cubertero 3 × 2|Cajón de taller 4 × 3|Maletín con sección ancha|Bandeja plana para piezas pequeñas|Dividir en piezas (mayor que la cama)|Ancho de la cama (mm)|Grosor de pared en la unión (mm)|Pasadores por unión|Diámetro del pasador (mm)",
-fr: "Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment|Sans charnière (couvercle séparé)|Une charnière|Deux charnières|Rayon des coins (mm)|Générateur de Boîtes|Générateur d’organiseurs|Cylindre|Cube|Pavé|Diamètre (mm)|Côté (mm)|Chanfrein supérieur (mm)|Couleurs|Corps|Couvercle|Insert|Langue|Unités|Nombre de compartiments|Dimensions trop petites.|Petite boîte|Boîte à bijoux|Grande boîte|Boîte plate|Pot à crayons|Organiseur de bureau|Support cubique|Organiseur rond|Modèles prêts|Modifier|Cannelures|Aucune|Arrondies|Carrées|Direction des cannelures|Verticale|Horizontale|Largeur des cannelures (mm)|Espacement (mm)|Hauteur des cannelures (mm)|Boîte cannelée|Boîte nervurée|Pot cannelé|Organiseur nervuré|Générateur de vases|Générateur de lampes|Diamètre de la base (mm)|Diamètre max (mm)|Forme du corps|Épaisseur de paroi (mm)|Nombre d’ondes/nervures|Profondeur d'onde (mm)|Torsion spirale (°)|Texture de surface|Vase minimaliste|Vase ondulé|Vase spiralé|Vase nervuré|Vase géométrique|Lisse|Ondulé|Nervuré|Diamant|Diamètre de l’abat-jour (mm)|Taille des trous (mm)|Densité du motif|Type de motif géométrique|Motif abat-jour|Lampe géométrique|Lampe ondulée|Lampe nervurée|Lampe organique|Lampe perforée|Grille|Concentrique|Cellules organiques|Avertissement : Cet abat-jour est conçu exclusivement pour des sources lumineuses LED basse température. Ne pas utiliser avec des ampoules à incandescence !|Droit|Bombé|Conique|Sablier|Goutte|Courbe S|Trois charnières|Boîte pour petites pièces|Boîte pour cartes mémoire|Grand pot à crayons|Plateau bas de tiroir|Vase organique en S|Grand bol spiralé|Lampe cylindrique perforée|Lampe d’ambiance en spirale|Ombrage doux dans l’aperçu|Spirale|Perforé|Organique|Zigzag|Organiseur de bureau|Largeur des notes (mm)|Profondeur des notes (mm)|Jeu des notes (mm)|Largeur de la partie droite (mm)|Compartiment enveloppes (mm)|Fente ciseaux (mm)|Nombre de pots à crayons|Hauteur des parois des notes (mm)|Hauteur avant du compartiment enveloppes (mm)|Encoche pour les doigts (mm)|Pour notes de 95 × 95|Compact|Grand poste de travail|Paiements bien visibles|Insert de tiroir|Largeur du tiroir (mm)|Profondeur du tiroir (mm)|Rapport de la première colonne|Hauteur des cloisons (%)|Range-couverts 3 × 2|Tiroir d’atelier 4 × 3|Mallette à grande section|Plateau plat pour petites pièces|Diviser en pièces (plus grand que le plateau)|Largeur du plateau (mm)|Épaisseur de paroi au joint (mm)|Goujons par joint|Diamètre du goujon (mm)"
+cs: "Krabička|Klíčenka|Šířka (mm)|Hloubka (mm)|Výška (mm)|Stěny (mm)|Dno (mm)|Víko (mm)|Zámek víka (mm)|Vůle (mm)|Print-in-place pant|Text|Písmo|Tvar|Velikost (mm)|Tloušťka (mm)|Výška textu (mm)|Velikost textu (%)|Očko|Průměr očka (mm)|Stáhnout STL|Stáhnout skicu (PNG)|Vnitřní prostor|Rozměry jsou příliš malé pro zámek a pant.|Srdce|Netopýr|Hvězda|Kolečko|Obdélník|Nastav rozměry, prohlédni si model a stáhni STL.|Táhni pro otáčení|Vložka s přihrádkami|Sloupce|Řady|Přepážky (mm)|Vůle vložky (mm)|Výška vložky (mm)|Přihrádka|Bez pantu (samostatné víko)|Jeden pant|Dva panty|Zaoblení rohů (mm)|Generátor krabiček|Generátor organizéru|Válec|Krychle|Kvádr|Průměr (mm)|Strana (mm)|Úkos horní hrany (mm)|Barvy|Tělo|Víko|Vložka|Jazyk|Jednotky|Počet přihrádek|Rozměry jsou příliš malé.|Malá krabička|Šperkovnice|Velká krabice|Plochá krabička|Kelímek na tužky|Stolní organizér|Krychlový stojánek|Kulatý s přihrádkami|Přednastavené modely|Upravit|Vroubkování|Žádné|Oblé|Čtvercové|Směr vroubků|Svisle|Vodorovně|Šířka vroubku (mm)|Rozteč vroubků (mm)|Výška vroubku (mm)|Krabička s vroubky|Pruhovaná krabice|Vroubkovaný kelímek|Žebrovaný organizér|Generátor váz|Generátor lamp|Průměr základny (mm)|Max. průměr (mm)|Tvar těla|Tloušťka stěny (mm)|Počet vln/žeber|Hloubka vlnění (mm)|Spirálové zkroucení (°)|Dekorativní povrch|Minimalistická váza|Vlnitá váza|Spirálová váza|Žebrovaná váza|Geometrická váza|Hladký|Vlnitý|Žebrovaný|Diamantový|Průměr stínidla (mm)|Velikost otvorů (mm)|Hustota vzoru|Typ geometrického vzoru|Vzor stínidla|Moderní geometrická lampa|Vlnitá lampa|Žebrovaná lampa|Organická lampa|Perforovaná lampa|Mřížka|Soustředný|Organické buňky|Upozornění: Tento model stínidla je určen výhradně pro nízkoteplotní LED světelné zdroje (LED žárovky nebo LED pásky). Nepoužívejte s klasickými žárovkami, které produkují vysoké teplo!|Rovný|Soudkovitý|Kuželový|Přesýpací hodiny|Kapka|S-křivka|Tři panty|Krabička na drobnosti|Krabička na paměťové karty|Vysoký stojánek na pera|Nízká zásuvková přihrádka|Organická S-váza|Široká spirálová mísa|Perforovaná válcová lampa|Spirálová ambientní lampa|Hladké stínování v náhledu|Spirálový|Perforace|Organický|Cik-cak|Stolní organizér|Šířka papírků (mm)|Hloubka papírků (mm)|Vůle papírků (mm)|Šířka pravé části (mm)|Fach na obálky (mm)|Šířka na nůžky (mm)|Počet kapes na tužky|Výška stěn na papírky (mm)|Výška přední stěny fachu (mm)|Výřez pro prsty (mm)|Na papírky 95 × 95|Kompaktní|Velký pracovní|Platby na očích|Vložka do šuplíku|Šířka šuplíku (mm)|Hloubka šuplíku (mm)|Poměr prvního sloupce|Výška přepážek (%)|Příborník 3 × 2|Dílenský šuplík 4 × 3|Kufřík se širokou přihrádkou|Plochá vložka na drobnosti|Rozdělit na díly (větší než podložka)|Šířka podložky (mm)|Tloušťka stěny u spoje (mm)|Počet kolíků na spoj|Průměr kolíku (mm)|Hloubka zadní části (mm)|Hrany|Kóty|Klikni = nová přepážka, táhni = posun, dvojklik = smazat|┃ Svislá|━ Vodorovná|Nepravidelné rozvržení|Simulace zavření|Přehrát|Úhel víka (°)|Víko se zavře bez kolize.|Kolize při úhlu |Typ spoje|Skryté kolíky|Rybina (zasunutí shora)",
+en: "Box|Keychain|Width (mm)|Depth (mm)|Height (mm)|Walls (mm)|Floor (mm)|Lid (mm)|Lid lip (mm)|Clearance (mm)|Print-in-place hinge|Text|Font|Shape|Size (mm)|Thickness (mm)|Text relief (mm)|Text size (%)|Eyelet|Eyelet diameter (mm)|Download STL|Download sketch (PNG)|Inner space|Dimensions too small for lip and hinge.|Heart|Bat|Star|Circle|Rectangle|Set dimensions, check 3D view and download STL.|Drag to rotate|Insert with compartments|Columns|Rows|Divider thickness (mm)|Insert clearance (mm)|Insert height (mm)|Compartment|No hinge (separate lid)|One hinge|Two hinges|Corner radius (mm)|Box Generator|Organizer Generator|Cylinder|Cube|Cuboid|Diameter (mm)|Side (mm)|Top chamfer (mm)|Colors|Body|Lid|Insert|Language|Units|Number of compartments|Dimensions too small.|Small box|Jewelry box|Large box|Flat case|Pencil cup|Desk organizer|Cube holder|Round caddy|Presets|Edit|Fluting|None|Rounded|Square|Flute direction|Vertical|Horizontal|Flute width (mm)|Flute spacing (mm)|Flute height (mm)|Fluted box|Ribbed case|Fluted cup|Ribbed organizer|Vase generator|Lamp generator|Base diameter (mm)|Max diameter (mm)|Body shape|Wall thickness (mm)|Waves/ribs count|Wave depth (mm)|Spiral twist (°)|Surface texture|Minimalist vase|Wavy vase|Spiral vase|Ribbed vase|Geometric vase|Smooth|Wavy|Ribbed|Diamond|Shade diameter (mm)|Hole size (mm)|Pattern density|Geometric pattern type|Shade pattern|Modern geometric lamp|Wavy lamp|Ribbed lamp|Organic lamp|Perforated lamp|Grid|Concentric|Organic cells|Notice: This lamp shade is designed exclusively for low-temperature LED light sources (LED bulbs or LED strips). Do not use with traditional incandescent bulbs producing high heat!|Straight|Bulging|Conical|Hourglass|Teardrop|S-Curve|Three hinges|Small parts box|Memory card box|Tall pen holder|Low drawer tray|Organic S-vase|Wide spiral bowl|Perforated cylinder lamp|Spiral ambient lamp|Smooth shading in preview|Spiral|Perforated|Organic|Zig-zag|Desk organizer|Note width (mm)|Note depth (mm)|Note clearance (mm)|Right section width (mm)|Envelope slot (mm)|Scissors slot (mm)|Number of pen cups|Notes tray wall height (mm)|Envelope slot front height (mm)|Finger notch (mm)|For 95 × 95 notes|Compact|Large workstation|Payments in sight|Drawer insert|Drawer width (mm)|Drawer depth (mm)|First column ratio|Divider height (%)|Cutlery tray 3 × 2|Workshop drawer 4 × 3|Case with wide section|Flat small-parts tray|Split into parts (larger than bed)|Print bed width (mm)|Seam wall thickness (mm)|Pins per seam|Pin diameter (mm)|Back section depth (mm)|Edges|Dimensions|Click = add divider, drag = move, double-click = delete|┃ Vertical|━ Horizontal|Irregular layout|Closing simulation|Play|Lid angle (°)|The lid closes without collision.|Collision at angle |Joint type|Hidden pins|Dovetail (slide in from above)",
+de: "Box|Schlüsselanhänger|Breite (mm)|Tiefe (mm)|Höhe (mm)|Wände (mm)|Boden (mm)|Deckel (mm)|Deckelrand (mm)|Spiel (mm)|Print-in-Place-Scharnier|Text|Schriftart|Form|Größe (mm)|Dicke (mm)|Texthöhe (mm)|Textgröße (%)|Öse|Ösendurchmesser (mm)|STL herunterladen|Skizze herunterladen (PNG)|Innenraum|Maße zu klein für Rand und Scharnier.|Herz|Fledermaus|Stern|Kreis|Rechteck|Maße einstellen, 3D-Ansicht prüfen und STL herunterladen.|Zum Drehen ziehen|Einsatz mit Fächern|Spalten|Reihen|Trennwände (mm)|Spiel des Einsatzes (mm)|Einsatzhöhe (mm)|Fach|Kein Scharnier (loser Deckel)|Ein Scharnier|Zwei Scharniere|Eckenradius (mm)|Boxen-Generator|Organizer-Generator|Zylinder|Würfel|Quader|Durchmesser (mm)|Seite (mm)|Kantenfase oben (mm)|Farben|Körper|Deckel|Einsatz|Sprache|Einheiten|Anzahl der Fächer|Maße zu klein.|Kleine Box|Schmuckkästchen|Große Box|Flache Dose|Stiftebecher|Schreibtisch-Organizer|Würfelhalter|Runder Organizer|Vorlagen|Bearbeiten|Riffelung|Keine|Gerundet|Eckig|Riffelrichtung|Senkrecht|Waagerecht|Riffelbreite (mm)|Riffelabstand (mm)|Riffelhöhe (mm)|Gerillte Box|Geriffelte Dose|Gerillter Becher|Geriffelter Organizer|Vasen-Generator|Lampen-Generator|Basisdurchmesser (mm)|Max. Durchmesser (mm)|Körperform|Wandstärke (mm)|Wellen-/Rippenanzahl|Wellentiefe (mm)|Spiraldrehung (°)|Oberflächenstruktur|Minimalistische Vase|Wellen-Vase|Spiral-Vase|Gerippte Vase|Geometrische Vase|Glatt|Wellig|Gerippt|Diamant|Schirmdurchmesser (mm)|Lochgröße (mm)|Musterdichte|Geometrischer Mustertyp|Schirmmuster|Moderne Geometrie-Lampe|Wellen-Lampe|Gerippte Lampe|Organische Lampe|Perforierte Lampe|Gitter|Konzentrisch|Organische Zellen|Hinweis: Dieser Lampenschirm ist ausschließlich für Niedertemperatur-LED-Leuchtmittel entwickelt. Nicht mit klassischen Glühlampen verwenden!|Gerade|Bauchig|Konisch|Sanduhr|Tropfen|S-Kurve|Drei Scharniere|Kleinteile-Box|Speicherkarten-Box|Hoher Stiftehalter|Flache Schubladenschale|Organische S-Vase|Breite Spiralschale|Zylinderlampe mit Lochmuster|Spiral-Stimmungsleuchte|Weiche Schattierung in der Vorschau|Spirale|Perforiert|Organisch|Zickzack|Schreibtisch-Organizer|Zettelbreite (mm)|Zetteltiefe (mm)|Spiel Zettel (mm)|Breite rechter Bereich (mm)|Briefumschlagfach (mm)|Scherenfach (mm)|Anzahl Stiftebecher|Wandhöhe Zettelfach (mm)|Vorderwandhöhe Briefumschlagfach (mm)|Fingeraussparung (mm)|Für Zettel 95 × 95|Kompakt|Großer Arbeitsplatz|Zahlungen im Blick|Schubladeneinsatz|Schubladenbreite (mm)|Schubladentiefe (mm)|Verhältnis erste Spalte|Trennwandhöhe (%)|Besteckkasten 3 × 2|Werkstattschublade 4 × 3|Koffer mit breitem Fach|Flache Kleinteileschale|In Teile teilen (größer als Druckbett)|Druckbettbreite (mm)|Wandstärke an der Naht (mm)|Stifte pro Naht|Stiftdurchmesser (mm)|Tiefe hinterer Bereich (mm)|Kanten|Maße|Klick = Trennwand hinzufügen, Ziehen = verschieben, Doppelklick = löschen|┃ Senkrecht|━ Waagerecht|Unregelmäßige Aufteilung|Schließsimulation|Abspielen|Deckelwinkel (°)|Der Deckel schließt ohne Kollision.|Kollision bei Winkel |Verbindungsart|Versteckte Stifte|Schwalbenschwanz (von oben einschieben)",
+es: "Caja|Llavero|Ancho (mm)|Fondo (mm)|Alto (mm)|Paredes (mm)|Base (mm)|Tapa (mm)|Labio de la tapa (mm)|Holgura (mm)|Bisagra print-in-place|Texto|Fuente|Forma|Tamaño (mm)|Grosor (mm)|Relieve del texto (mm)|Tamaño del texto (%)|Anilla|Diámetro de la anilla (mm)|Descargar STL|Descargar boceto (PNG)|Espacio interior|Medidas demasiado pequeñas para el labio y la bisagra.|Corazón|Murciélago|Estrella|Círculo|Rectángulo|Ajusta medidas, revisa 3D y descarga STL.|Arrastra para girar|Inserto con compartimentos|Columnas|Filas|Divisiones (mm)|Holgura del inserto (mm)|Altura del inserto (mm)|Compartimento|Sin bisagra (tapa suelta)|Una bisagra|Dos bisagras|Radio de esquinas (mm)|Generador de Cajas|Generador de Organizadores|Cilindro|Cubo|Prisma|Diámetro (mm)|Lado (mm)|Chaflán superior (mm)|Colores|Cuerpo|Tapa|Inserto|Idioma|Unidades|Número de compartimentos|Medidas demasiado pequeñas.|Caja pequeña|Joyero|Caja grande|Caja plana|Vaso para lápices|Organizador de escritorio|Soporte cúbico|Organizador redondo|Modelos predefinidos|Editar|Estriado|Ninguno|Redondeado|Cuadrado|Dirección del estriado|Vertical|Horizontal|Ancho del estriado (mm)|Separación (mm)|Altura del estriado (mm)|Caja estriada|Caja acanalada|Vaso estriado|Organizador acanalado|Generador de jarrones|Generador de lámparas|Diámetro de la base (mm)|Diámetro máx (mm)|Forma del cuerpo|Grosor de pared (mm)|Nº de ondas/nervios|Profundidad de onda (mm)|Torsión espiral (°)|Textura superficial|Jarrón minimalista|Jarrón ondulado|Jarrón en espiral|Jarrón acanalado|Jarrón geométrico|Liso|Ondulado|Acanalado|Diamante|Diámetro pantalla (mm)|Tamaño de orificios (mm)|Densidad de patrón|Tipo patrón geométrico|Patrón pantalla|Lámpara geométrica|Lámpara ondulada|Lámpara acanalada|Lámpara orgánica|Lámpara perforada|Rejilla|Concéntrico|Células orgánicas|Aviso: Esta pantalla está diseñada exclusivamente para fuentes LED de baja temperatura. ¡No usar con bombillas incandescentes!|Recto|Abombado|Cónico|Reloj de arena|Gota|Curva S|Tres bisagras|Caja para piezas pequeñas|Caja para tarjetas de memoria|Portalápices alto|Bandeja baja para cajón|Jarrón orgánico en S|Cuenco espiral ancho|Lámpara cilíndrica perforada|Lámpara ambiental en espiral|Sombreado suave en la vista previa|Espiral|Perforado|Orgánico|Zigzag|Organizador de escritorio|Ancho de las notas (mm)|Fondo de las notas (mm)|Holgura de notas (mm)|Ancho de la parte derecha (mm)|Compartimento para sobres (mm)|Ranura para tijeras (mm)|Número de vasos para lápices|Altura de paredes de notas (mm)|Altura frontal de sobres (mm)|Muesca para dedos (mm)|Para notas de 95 × 95|Compacto|Escritorio grande|Pagos a la vista|Inserto para cajón|Ancho del cajón (mm)|Fondo del cajón (mm)|Proporción de la primera columna|Altura de divisiones (%)|Cubertero 3 × 2|Cajón de taller 4 × 3|Maletín con sección ancha|Bandeja plana para piezas pequeñas|Dividir en piezas (mayor que la cama)|Ancho de la cama (mm)|Grosor de pared en la unión (mm)|Pasadores por unión|Diámetro del pasador (mm)|Fondo de la parte trasera (mm)|Bordes|Cotas|Clic = añadir división, arrastrar = mover, doble clic = borrar|┃ Vertical|━ Horizontal|Distribución irregular|Simulación de cierre|Reproducir|Ángulo de la tapa (°)|La tapa cierra sin colisión.|Colisión en el ángulo |Tipo de unión|Pasadores ocultos|Cola de milano (insertar desde arriba)",
+fr: "Boîte|Porte-clés|Largeur (mm)|Profondeur (mm)|Hauteur (mm)|Parois (mm)|Fond (mm)|Couvercle (mm)|Rebord du couvercle (mm)|Jeu (mm)|Charnière print-in-place|Texte|Police|Forme|Taille (mm)|Épaisseur (mm)|Relief du texte (mm)|Taille du texte (%)|Anneau|Diamètre de l’anneau (mm)|Télécharger le STL|Télécharger l’esquisse (PNG)|Espace intérieur|Dimensions trop petites pour le rebord et la charnière.|Cœur|Chauve-souris|Étoile|Cercle|Rectangle|Réglez les dimensions, vérifiez la 3D et téléchargez le STL.|Glisser pour tourner|Insert à compartiments|Colonnes|Rangées|Cloisons (mm)|Jeu de l’insert (mm)|Hauteur de l’insert (mm)|Compartiment|Sans charnière (couvercle séparé)|Une charnière|Deux charnières|Rayon des coins (mm)|Générateur de Boîtes|Générateur d’organiseurs|Cylindre|Cube|Pavé|Diamètre (mm)|Côté (mm)|Chanfrein supérieur (mm)|Couleurs|Corps|Couvercle|Insert|Langue|Unités|Nombre de compartiments|Dimensions trop petites.|Petite boîte|Boîte à bijoux|Grande boîte|Boîte plate|Pot à crayons|Organiseur de bureau|Support cubique|Organiseur rond|Modèles prêts|Modifier|Cannelures|Aucune|Arrondies|Carrées|Direction des cannelures|Verticale|Horizontale|Largeur des cannelures (mm)|Espacement (mm)|Hauteur des cannelures (mm)|Boîte cannelée|Boîte nervurée|Pot cannelé|Organiseur nervuré|Générateur de vases|Générateur de lampes|Diamètre de la base (mm)|Diamètre max (mm)|Forme du corps|Épaisseur de paroi (mm)|Nombre d’ondes/nervures|Profondeur d'onde (mm)|Torsion spirale (°)|Texture de surface|Vase minimaliste|Vase ondulé|Vase spiralé|Vase nervuré|Vase géométrique|Lisse|Ondulé|Nervuré|Diamant|Diamètre de l’abat-jour (mm)|Taille des trous (mm)|Densité du motif|Type de motif géométrique|Motif abat-jour|Lampe géométrique|Lampe ondulée|Lampe nervurée|Lampe organique|Lampe perforée|Grille|Concentrique|Cellules organiques|Avertissement : Cet abat-jour est conçu exclusivement pour des sources lumineuses LED basse température. Ne pas utiliser avec des ampoules à incandescence !|Droit|Bombé|Conique|Sablier|Goutte|Courbe S|Trois charnières|Boîte pour petites pièces|Boîte pour cartes mémoire|Grand pot à crayons|Plateau bas de tiroir|Vase organique en S|Grand bol spiralé|Lampe cylindrique perforée|Lampe d’ambiance en spirale|Ombrage doux dans l’aperçu|Spirale|Perforé|Organique|Zigzag|Organiseur de bureau|Largeur des notes (mm)|Profondeur des notes (mm)|Jeu des notes (mm)|Largeur de la partie droite (mm)|Compartiment enveloppes (mm)|Fente ciseaux (mm)|Nombre de pots à crayons|Hauteur des parois des notes (mm)|Hauteur avant du compartiment enveloppes (mm)|Encoche pour les doigts (mm)|Pour notes de 95 × 95|Compact|Grand poste de travail|Paiements bien visibles|Insert de tiroir|Largeur du tiroir (mm)|Profondeur du tiroir (mm)|Rapport de la première colonne|Hauteur des cloisons (%)|Range-couverts 3 × 2|Tiroir d’atelier 4 × 3|Mallette à grande section|Plateau plat pour petites pièces|Diviser en pièces (plus grand que le plateau)|Largeur du plateau (mm)|Épaisseur de paroi au joint (mm)|Goujons par joint|Diamètre du goujon (mm)|Profondeur de la partie arrière (mm)|Arêtes|Cotes|Clic = ajouter une cloison, glisser = déplacer, double-clic = supprimer|┃ Verticale|━ Horizontale|Disposition irrégulière|Simulation de fermeture|Lecture|Angle du couvercle (°)|Le couvercle se ferme sans collision.|Collision à l’angle |Type d’assemblage|Goujons cachés|Queue d’aronde (insertion par le haut)"
 };
 
 var lang = (navigator.language || "cs").slice(0, 2);
@@ -521,8 +526,8 @@ var v = {
   // Lamp
   lhght: 140, ld: 80, lwt: 2, lr: 12, lhs: 6, lden: 5, lp: 0, lpt: 0, lsmooth: 1,
   // Desk
-  dnw: 95, dnd: 95, dtol: .6, dwr: 80, des: 14, dsc: 22, dnp: 2, dhh: 110, dhn: 25, dhf: 55, dgn: 30, dwl: 2.4, dfl: 3,
-  xw: 300, xd: 200, xh: 45, xcl: .6, xt: 1.6, xf: 1.6, xc: 3, xr: 2, xk: 1, xdh: 100, xrr: 6, xsp: 0, xbx: 220, xtl: 5, xpn: 2, xpd: 3
+  dnw: 95, dnd: 95, dtol: .6, dwr: 80, des: 14, dsc: 22, dnp: 2, dhh: 110, dhn: 25, dhf: 55, dgn: 30, dwl: 2.4, dfl: 3, dbd: 80,
+  xw: 300, xd: 200, xh: 45, xcl: .6, xt: 1.6, xf: 1.6, xc: 3, xr: 2, xk: 1, xdh: 100, xrr: 6, xsp: 0, xlt: 0, xbx: 220, xtl: 5, xpn: 2, xpd: 3
 };
 
 var DEF = {
@@ -546,8 +551,8 @@ var DEF = {
   ]
 };
 
-DEF.desk = [["dnw",136,40,200,1],["dnd",137,40,200,1],["dtol",138,0,2,.1],["dwr",139,50,150,1],["des",140,6,40,1],["dsc",141,0,50,1],["dnp",142,1,5,1],["dhh",4,40,200,1],["dhn",143,10,100,1],["dhf",144,20,150,1],["dgn",145,0,60,1],["dwl",5,1.2,6,.2],["dfl",6,1,6,.2]];
-DEF.drw = [["xw",151,50,800,1],["xd",152,50,800,1],["xh",4,10,200,1],["xcl",9,0,3,.1],["xt",5,.8,6,.2],["xf",6,.8,6,.2],["xc",32,1,10,1],["xr",33,1,10,1],["xk",153,.5,3,.1],["xdh",154,30,100,5],["xrr",41,0,30,1],["xsp",159,"chk"],["xbx",160,100,500,5],["xtl",161,3,10,.5],["xpn",162,1,6,1],["xpd",163,2,6,.5]];
+DEF.desk = [["dnw",136,40,200,1],["dnd",137,40,200,1],["dtol",138,0,2,.1],["dwr",139,0,150,1],["dbd",164,50,200,1],["des",140,6,40,1],["dsc",141,0,50,1],["dnp",142,1,5,1],["dhh",4,40,200,1],["dhn",143,10,100,1],["dhf",144,20,150,1],["dgn",145,0,60,1],["dwl",5,1.2,6,.2],["dfl",6,1,6,.2]];
+DEF.drw = [["xw",151,50,800,1],["xd",152,50,800,1],["xh",4,10,200,1],["xcl",9,0,3,.1],["xt",5,.8,6,.2],["xf",6,.8,6,.2],["xc",32,1,10,1],["xr",33,1,10,1],["xk",153,.5,3,.1],["xdh",154,30,100,5],["xrr",41,0,30,1],["xsp",159,"chk"],["xlt",176,"sel",[177,178]],["xbx",160,100,500,5],["xtl",161,3,10,.5],["xpn",162,1,6,1],["xpd",163,2,6,.5]];
 function T(i) { return LG[lang].split("|")[i] || ""; }
 var $ = function(i) { return document.getElementById(i); };
 
@@ -659,7 +664,7 @@ function boxParts() {
       inf = "<br>" + T(37) + ": " + F(cw) + " × " + F(ch) + " × " + F(ihe - fi) + " " + unit;
     }
   }
-  return { P: P, info: ok ? T(22) + ": " + F(W - 2 * t) + " × " + F(D - 2 * t) + " × " + F(H - f) + " " + unit + inf : '<span class="warn">' + T(23) + "</span>" };
+  return { P: P, sim: (hg && ok) ? { ya: ya, za: za, W: W, D: D, H: H, t: t, f: f } : null, info: ok ? T(22) + ": " + F(W - 2 * t) + " × " + F(D - 2 * t) + " × " + F(H - f) + " " + unit + inf : '<span class="warn">' + T(23) + "</span>" };
 }
 
 function orgParts() {
@@ -954,24 +959,27 @@ function lampParts() {
   };
 }
 
-/* STOLNÍ ORGANIZÉR: papírky vlevo; vpravo vpředu kapsy na tužky, uprostřed nůžky, vzadu fach na obálky */
+/* STOLNÍ ORGANIZÉR: vpředu papírky (a přihrádka vpravo), vzadu stupňovitě kapsy na tužky, nůžky a fach na obálky */
 function deskParts() {
-  var t = v.dwl, f = v.dfl, hh = v.dhh, hn = Math.min(v.dhn, hh), hf = Math.min(v.dhf, hh), hp = Math.round(hh * .65), np = Math.max(1, Math.round(v.dnp)),
-      Nw = v.dnw + 2 * v.dtol, Nd = v.dnd + 2 * v.dtol, Wr = v.dwr, es = v.des, sc = v.dsc, gn = v.dgn,
-      xN = t + Nw, xR = xN + t, W = xR + Wr + t, D = Nd + 2 * t, yS = D - 2 * t - es, yP1 = sc > 0 ? yS - sc - t : yS,
-      pcw = (Wr - (np - 1) * t) / np, ok = (yP1 - t) >= 20 && pcw >= 14, B = [], i, xc = xR + Wr / 2;
-  B.push([0, 0, 0, W, D, f]);
-  B.push([0, 0, f, t, D, hn], [0, 0, f, xR, t, hn], [0, D - t, f, xR, D, hn]);
-  B.push([xN, t, f, xR, D - t, hh]);
-  B.push([xR, D - t, f, W, D, hh], [W - t, 0, f, W, D - t, hh], [xR, 0, f, W - t, t, hp]);
-  if (gn > 0 && gn < Wr - 6) B.push([xR, yS, f, xc - gn / 2, yS + t, hf], [xc + gn / 2, yS, f, W - t, yS + t, hf]);
-  else B.push([xR, yS, f, W - t, yS + t, hf]);
-  if (sc > 0) B.push([xR, yP1, f, W - t, yP1 + t, hp]);
-  for (i = 1; i < np; i++) { var xx = xR + i * pcw + (i - 1) * t; B.push([xx, t, f, xx + t, yP1, hp]); }
-  return {
-    P: ok ? [{ a: bx(B), k: 0 }] : [{ a: bx([[0, 0, 0, 30, 30, 2]]), k: 0 }],
-    info: ok ? T(22) + ": " + F(v.dnw) + " × " + F(v.dnd) + " " + unit + "<br>" + F(W) + " × " + F(D) + " × " + F(hh) + " " + unit : '<span class="warn">' + T(57) + "</span>"
-  };
+  var t = v.dwl, f = v.dfl, hh = v.dhh, hn = Math.min(v.dhn, hh - 10), hf = Math.min(v.dhf, hh), hp = Math.round(hh * .65), np = Math.max(1, Math.round(v.dnp)),
+      Nw = v.dnw + 2 * v.dtol, Nd = v.dnd + 2 * v.dtol, Wr = v.dwr, bd = v.dbd, es = v.des, sc = v.dsc, gn = v.dgn,
+      W = Nw + 2 * t + (Wr > 0 ? Wr + t : 0), yb0 = 2 * t + Nd, D = yb0 + bd + t, yS = D - 2 * t - es, yP1 = sc > 0 ? yS - sc - t : yS,
+      Wb = W - 2 * t, pcw = (Wb - (np - 1) * t) / np, ok = (yP1 - yb0) >= 20 && pcw >= 14 && hn > f + 5, B = [], i, xc = W / 2, P = [], y1 = t + Nd, y2 = y1 + Math.min(bd * .5, 40);
+  var side = [[0, 0], [D, 0], [D, hh], [y2, hh]], sk, ss;
+  for (sk = 1; sk <= 14; sk++) { ss = sk / 14; side.push([y2 + (y1 - y2) * sk / 14, hh + (hn - hh) * (3 * ss * ss - 2 * ss * ss * ss)]); }
+  side.push([0, hn]);
+  B.push([0, 0, 0, W, D, f], [t, 0, f, W - t, t, hn], [t, D - t, f, W - t, D, hh], [t, y1, f, W - t, yb0, hp]);
+  if (Wr > 0) B.push([t + Nw, t, f, t + Nw + t, y1, Math.min(hh, hn + 14)]);
+  if (gn > 0 && gn < Wb - 6) B.push([t, yS, f, xc - gn / 2, yS + t, hf], [xc + gn / 2, yS, f, W - t, yS + t, hf]);
+  else B.push([t, yS, f, W - t, yS + t, hf]);
+  if (sc > 0) B.push([t, yP1, f, W - t, yP1 + t, hp]);
+  for (i = 1; i < np; i++) { var xx = t + i * pcw + (i - 1) * t; B.push([xx, yb0, f, xx + t, yP1, hp]); }
+  if (ok) {
+    P.push({ a: bx(B), k: 0 });
+    [0, W - t].forEach(function(x0) { P.push({ a: mv(ex(side, t), function(X, Y, Z) { return [x0 + Z, X, Y]; }), k: 0 }); });
+    ribs(P, { W: W, D: D, R: 0, z0: f + 1.5, z1: hn - 1.5, E: [] });
+  } else P.push({ a: bx([[0, 0, 0, 30, 30, 2]]), k: 0 });
+  return { P: P, info: ok ? T(22) + ": " + F(v.dnw) + " × " + F(v.dnd) + " " + unit + "<br>" + F(W) + " × " + F(D) + " × " + F(hh) + " " + unit : '<span class="warn">' + T(57) + "</span>" };
 }
 
 /* VLOŽKA DO ŠUPLÍKU / KUFŘÍKU */
@@ -980,57 +988,142 @@ function exH(pts, holes, d) {
   holes.forEach(function(hl) { s.holes.push(new THREE.Path(hl.map(function(p) { return new THREE.Vector2(p[0], p[1]); }))); });
   return new THREE.ExtrudeGeometry(s, { depth: d, bevelEnabled: false }).attributes.position.array;
 }
-/* Rozdělená vložka: švy jsou dvojité stěny ve směru Y, spojené skrytými kolíky (vidět je jen mezera ve švu) */
+/* Rozdělená vložka: švy jsou dvojité svislé stěny přes celou hloubku, spojené skrytými kolíky; používá volné rozvržení */
 function drawerSplit() {
-  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, n = Math.max(1, Math.round(v.xc)), m = Math.max(1, Math.round(v.xr)),
-      sg = .3, tl = v.xtl, Ts = 2 * tl + sg, hd = f + (H - f) * v.xdh / 100, K = Math.ceil(W / v.xbx) - 1, np = Math.max(1, Math.round(v.xpn)),
-      pr = v.xpd / 2, pl = tl - 2.2, ds = pl + .6, zc = (f + hd) / 2, S = [], i, j, k, g, bad = K >= n;
-  for (k = 1; k <= K; k++) { S.push(Math.max(k, Math.min(n - 1, Math.round(k * n / (K + 1))))); if (k > 1 && S[k - 1] <= S[k - 2]) bad = true; }
-  var tx = [], totTx = 0, dv = [], c0 = [], c1 = [], x = t;
-  for (i = 1; i < n; i++) { tx[i] = S.indexOf(i) >= 0 ? Ts : t; totTx += tx[i]; }
-  var Wi = W - 2 * t - totTx, tot = v.xk + n - 1, rh = (D - 2 * t - (m - 1) * t) / m;
-  for (i = 0; i < n; i++) { c0[i] = x; x += Wi * (i == 0 ? v.xk : 1) / tot; c1[i] = x; if (i < n - 1) { dv[i + 1] = x; x += tx[i + 1]; } }
-  var PR = [], a0 = 0;
-  S.forEach(function(s) { PR.push([a0, dv[s] + tl]); a0 = dv[s] + tl + sg; }); PR.push([a0, W]);
-  var Bp = PR.map(function() { return []; }), M = PR.map(function() { return []; });
+  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, sg = .3, tl = v.xtl, hd = f + (H - f) * v.xdh / 100,
+      K = Math.ceil(W / v.xbx) - 1, np = Math.max(1, Math.round(v.xpn)), pr = v.xpd / 2, pl = tl - 2.2, ds = pl + .6, zc = (f + hd) / 2,
+      B = [], cells = [], cand = [], S = [], i, k, bad = false;
+  walkT(getLay(), t, t, W - t, D - t, t, function(nd, x0, y0, x1, y1, p) {
+    if (!nd.d) cells.push([x0, y0, x1, y1]);
+    else if (nd.d == "v") { if (Math.abs(y0 - t) < .01 && Math.abs(y1 - (D - t)) < .01) cand.push({ p: p, bi: B.length }); B.push([p - t / 2, y0, f, p + t / 2, y1, hd]); }
+    else B.push([x0, p - t / 2, f, x1, p + t / 2, hd]);
+  });
+  for (k = 1; k <= K; k++) {
+    var best = null, tg = k * W / (K + 1);
+    cand.forEach(function(c) { if (S.indexOf(c) < 0 && (!best || Math.abs(c.p - tg) < Math.abs(best.p - tg))) best = c; });
+    if (!best) { bad = true; break; } S.push(best);
+  }
+  S.sort(function(a, b) { return a.p - b.p; });
+  S.forEach(function(c) { B[c.bi] = null; });
+  var PR = [], a0 = 0, Bp, M;
+  S.forEach(function(c) { PR.push([a0, c.p - sg / 2]); a0 = c.p + sg / 2; }); PR.push([a0, W]);
+  Bp = PR.map(function() { return []; }); M = PR.map(function() { return []; });
   function add(b) { PR.forEach(function(r, q) { var a = Math.max(b[0], r[0]), c = Math.min(b[3], r[1]); if (c - a > .01) Bp[q].push([a, b[1], b[2], c, b[4], b[5]]); }); }
   add([0, 0, 0, W, D, f]); add([0, 0, f, W, t, H]); add([0, D - t, f, W, D, H]); add([0, t, f, t, D - t, H]); add([W - t, t, f, W, D - t, H]);
+  B.forEach(function(b) { if (b) add(b); });
   var rect = [[t, f], [D - t, f], [D - t, hd], [t, hd]];
-  for (i = 1; i < n; i++) {
-    var xd = dv[i], q = S.indexOf(i);
-    if (q < 0) { add([xd, t, f, xd + t, D - t, hd]); continue; }
-    var ys = [], xb = xd + tl + sg;
+  S.forEach(function(c, q) {
+    var ys = [], xb = c.p + sg / 2;
     for (k = 0; k < np; k++) ys.push(t + (k + .5) * (D - 2 * t) / np);
-    Bp[q].push([xd, t, f, xd + tl, D - t, hd]);
-    ys.forEach(function(yy) { M[q].push(mv(ex(cir(yy, zc, pr, 16), 1 + sg + pl), function(X, Y, Z) { return [xd + tl - 1 + Z, X, Y]; })); });
-    M[q + 1].push(mv(exH(rect, ys.map(function(yy) { return cir(yy, zc, pr + .25, 16); }), ds), function(X, Y, Z) { return [xb + Z, X, Y]; }));
-    Bp[q + 1].push([xb + ds, t, f, xd + Ts, D - t, hd]);
-  }
-  for (j = 1; j < m; j++) { var y = t + j * rh + (j - 1) * t; for (i = 0; i < n; i++) add([c0[i], y, f, c1[i], y + t, hd]); }
-  var ok = !bad && Math.min(c1[0] - c0[0], rh) >= 10 && tl >= 4 && hd - f >= 8, P = [];
+    Bp[q].push([c.p - sg / 2 - tl, t, f, c.p - sg / 2, D - t, hd]);
+    if (v.xlt == 1) {
+      var dd = tl - 1.6, wn = 5, wh = 7.6, cc = .25, hz = hd - f, xa = c.p - sg / 2, pg = [[xb + tl, t], [xb + tl, D - t], [xb, D - t]];
+      ys.forEach(function(yy) { M[q].push(tz(ex([[xa - .3, yy - wn / 2], [xa + dd, yy - wh / 2], [xa + dd, yy + wh / 2], [xa - .3, yy + wn / 2]], hz), f)); });
+      ys.slice().reverse().forEach(function(yy) { pg.push([xb, yy + wn / 2 + cc], [xb + dd + cc, yy + wh / 2 + cc], [xb + dd + cc, yy - wh / 2 - cc], [xb, yy - wn / 2 - cc]); });
+      pg.push([xb, t]);
+      M[q + 1].push(tz(ex(pg, hz), f));
+    } else {
+      ys.forEach(function(yy) { M[q].push(mv(ex(cir(yy, zc, pr, 16), 1 + sg + pl), function(X, Y, Z) { return [c.p - sg / 2 - 1 + Z, X, Y]; })); });
+      M[q + 1].push(mv(exH(rect, ys.map(function(yy) { return cir(yy, zc, pr + .25, 16); }), ds), function(X, Y, Z) { return [xb + Z, X, Y]; }));
+      Bp[q + 1].push([xb + ds, t, f, xb + tl, D - t, hd]);
+    }
+  });
+  var ok = !bad && tl >= 4 && hd - f >= 8 && H > f + 5 && (v.xlt != 1 || (D - 2 * t) / np >= 10) && cells.every(function(q) { return q[2] - q[0] >= 8 && q[3] - q[1] >= 8; }), P = [], big = false;
   if (ok) PR.forEach(function(r, q) {
     var dx = q * 14, sh = function(a) { return mv(a, function(X, Y, Z) { return [X + dx, Y, Z]; }); };
+    if (r[1] - r[0] > v.xbx) big = true;
     if (Bp[q].length) P.push({ a: sh(bx(Bp[q])), k: 0 });
     M[q].forEach(function(a) { P.push({ a: sh(a), k: 0 }); });
   });
   else P.push({ a: bx([[0, 0, 0, 30, 30, 2]]), k: 0 });
-  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + (K + 1) + " ×" : '<span class="warn">' + T(57) + "</span>" };
+  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + PR.length + " ×" + (big ? ' <span class="warn">⚠ &gt; ' + F(v.xbx) + "</span>" : "") : '<span class="warn">' + T(57) + "</span>" };
 }
-
+function walkT(nd, x0, y0, x1, y1, t, fn) {
+  if (!nd.d) { fn(nd, x0, y0, x1, y1); return; }
+  var vv = nd.d == "v", p = vv ? x0 + nd.p * (x1 - x0) : y0 + nd.p * (y1 - y0);
+  fn(nd, x0, y0, x1, y1, p);
+  if (vv) { walkT(nd.a, x0, y0, p - t / 2, y1, t, fn); walkT(nd.b, p + t / 2, y0, x1, y1, t, fn); }
+  else { walkT(nd.a, x0, y0, x1, p - t / 2, t, fn); walkT(nd.b, x0, p + t / 2, x1, y1, t, fn); }
+}
+function gridTree(n, m, k1) {
+  function wt(i) { return i == 0 ? k1 : 1; }
+  function rw(j0, j1) { if (j1 - j0 == 1) return {}; var mid = Math.floor((j0 + j1) / 2); return { d: "h", p: (mid - j0) / (j1 - j0), a: rw(j0, mid), b: rw(mid, j1) }; }
+  function cs(i0, i1) {
+    if (i1 - i0 == 1) return rw(0, m);
+    var mid = Math.floor((i0 + i1) / 2), a = 0, b = 0, i;
+    for (i = i0; i < i1; i++) { if (i < mid) a += wt(i); b += wt(i); }
+    return { d: "v", p: a / b, a: cs(i0, mid), b: cs(mid, i1) };
+  }
+  return cs(0, n);
+}
+function getLay() {
+  var key = Math.round(v.xc) + "x" + Math.round(v.xr) + "x" + v.xk;
+  if (!v.lay || v.layN != key) { v.lay = gridTree(Math.max(1, Math.round(v.xc)), Math.max(1, Math.round(v.xr)), v.xk); v.layN = key; }
+  return v.lay;
+}
+function layEditor(c) {
+  var wrap = document.createElement("div"), tb = document.createElement("div"), cv = document.createElement("canvas"), ctx = cv.getContext("2d"), tool = "v", hits = [], drag = null, s = 1;
+  wrap.className = "laywrap"; tb.className = "laytb";
+  tb.innerHTML = '<button class="alt on" data-t="v">' + T(168) + '</button><button class="alt" data-t="h">' + T(169) + '</button>';
+  Array.prototype.forEach.call(tb.children, function(b) { b.onclick = function() { tool = b.getAttribute("data-t"); Array.prototype.forEach.call(tb.children, function(x) { x.className = "alt" + (x == b ? " on" : ""); }); }; });
+  var hint = document.createElement("div"); hint.className = "info"; hint.textContent = T(167);
+  cv.style.touchAction = "none"; cv.style.cursor = "crosshair"; cv.style.maxWidth = "100%"; cv.style.border = "1px solid var(--line)";
+  wrap.appendChild(tb); wrap.appendChild(cv); wrap.appendChild(hint); c.appendChild(wrap);
+  function dims() { var W = v.xw - 2 * v.xcl, D = v.xd - 2 * v.xcl; s = Math.min(300 / W, 300 / D); cv.width = Math.max(40, Math.round(W * s)); cv.height = Math.max(40, Math.round(D * s)); return [W, D]; }
+  function redraw() {
+    var d = dims(), t = v.xt, ac = css("--acc") || "#0a5fd6"; hits = [];
+    ctx.fillStyle = css("--panel") || "#fff"; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+    walkT(getLay(), t, t, d[0] - t, d[1] - t, t, function(nd, x0, y0, x1, y1, p) {
+      if (!nd.d) { ctx.fillStyle = css("--mute") || "#667"; ctx.fillText(F(x1 - x0) + "×" + F(y1 - y0), (x0 + x1) / 2 * s, (y0 + y1) / 2 * s + 4); return; }
+      ctx.strokeStyle = ac; ctx.lineWidth = Math.max(3, t * s); ctx.beginPath();
+      if (nd.d == "v") { ctx.moveTo(p * s, y0 * s); ctx.lineTo(p * s, y1 * s); } else { ctx.moveTo(x0 * s, p * s); ctx.lineTo(x1 * s, p * s); }
+      ctx.stroke(); hits.push({ nd: nd, x0: x0, y0: y0, x1: x1, y1: y1, p: p });
+    });
+    ctx.strokeStyle = ac; ctx.lineWidth = 3; ctx.strokeRect(1, 1, cv.width - 2, cv.height - 2);
+  }
+  function pt(e) { var r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * cv.width / r.width / s, (e.clientY - r.top) * cv.height / r.height / s]; }
+  function hit(m) {
+    var best = null, tol = Math.max(6 / s, v.xt);
+    hits.forEach(function(q) {
+      var inx = m[0] >= q.x0 - tol && m[0] <= q.x1 + tol, iny = m[1] >= q.y0 - tol && m[1] <= q.y1 + tol;
+      if (q.nd.d == "v" ? (Math.abs(m[0] - q.p) <= tol && iny) : (Math.abs(m[1] - q.p) <= tol && inx)) best = q;
+    });
+    return best;
+  }
+  cv.onpointerdown = function(e) {
+    var m = pt(e), q = hit(m), t = v.xt, d = dims();
+    if (q) { drag = q; cv.setPointerCapture(e.pointerId); return; }
+    walkT(getLay(), t, t, d[0] - t, d[1] - t, t, function(nd, x0, y0, x1, y1) {
+      if (!nd.d && m[0] >= x0 && m[0] <= x1 && m[1] >= y0 && m[1] <= y1) { nd.d = tool; nd.p = tool == "v" ? (m[0] - x0) / (x1 - x0) : (m[1] - y0) / (y1 - y0); nd.a = {}; nd.b = {}; }
+    });
+    update();
+  };
+  cv.onpointermove = function(e) {
+    if (!drag) return;
+    var m = pt(e), vv = drag.nd.d == "v", L = vv ? drag.x1 - drag.x0 : drag.y1 - drag.y0, p = (vv ? m[0] - drag.x0 : m[1] - drag.y0) / L, mf = Math.min(.45, 12 / L);
+    var o0 = vv ? drag.x0 : drag.y0; p = (o0 + Math.round(p * L - v.xt / 2) + v.xt / 2 - o0) / L; drag.nd.p = Math.max(mf, Math.min(1 - mf, p)); update();
+  };
+  cv.onpointerup = cv.onpointercancel = function() { drag = null; };
+  cv.ondblclick = function(e) { var q = hit(pt(e)); if (q) { delete q.nd.d; delete q.nd.a; delete q.nd.b; delete q.nd.p; update(); } };
+  layRedraw = redraw; redraw();
+}
 function drawerParts() {
   if (v.xsp && Math.ceil((v.xw - 2 * v.xcl) / v.xbx) > 1) return drawerSplit();
-  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, n = Math.max(1, Math.round(v.xc)), m = Math.max(1, Math.round(v.xr)),
-      R = Math.max(0, Math.min(v.xrr, Math.min(W, D) / 2 - 1)), tot = v.xk + n - 1, Wi = W - 2 * t - (n - 1) * t, Di = D - 2 * t - (m - 1) * t,
-      hd = f + (H - f) * v.xdh / 100, rh = Di / m, i, j, B = [], P = [], xs = [], x = t, w1 = Wi * v.xk / tot, wo = Wi / tot, ok = Math.min(w1, wo, rh) >= 10 && H > f + 5;
+  var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, R = Math.max(0, Math.min(v.xrr, Math.min(W, D) / 2 - 1)),
+      hd = f + (H - f) * v.xdh / 100, B = [], cells = [], P = [];
+  walkT(getLay(), t, t, W - t, D - t, t, function(nd, x0, y0, x1, y1, p) {
+    if (!nd.d) cells.push([x0, y0, x1, y1]);
+    else if (nd.d == "v") B.push([p - t / 2, y0, f, p + t / 2, y1, hd]);
+    else B.push([x0, p - t / 2, f, x1, p + t / 2, hd]);
+  });
+  var ok = H > f + 5 && cells.every(function(q) { return q[2] - q[0] >= 8 && q[3] - q[1] >= 8; });
   P.push({ a: ex(rr(0, 0, W, D, R), f), k: 0 });
   if (ok) {
     P.push({ a: tz(ex(rr(0, 0, W, D, R), H - f, rr(t, t, W - t, D - t, Math.max(0, R - t))), f), k: 0 });
-    for (i = 0; i < n; i++) { xs.push([x, x + (i == 0 ? w1 : wo)]); x += (i == 0 ? w1 : wo) + t; }
-    for (i = 1; i < n; i++) B.push([xs[i][0] - t, t, f, xs[i][0], D - t, hd]);
-    for (j = 1; j < m; j++) { var y = t + j * rh + (j - 1) * t; for (i = 0; i < n; i++) B.push([xs[i][0], y, f, xs[i][1], y + t, hd]); }
     if (B.length) P.push({ a: bx(B), k: 0 });
   }
-  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + T(37) + ": " + F(w1) + (n > 1 ? " / " + F(wo) : "") + " × " + F(rh) + " " + unit : '<span class="warn">' + T(57) + "</span>" };
+  return { P: P, info: ok ? F(W) + " × " + F(D) + " × " + F(H) + " " + unit + "<br>" + T(37) + ": " + cells.length : '<span class="warn">' + T(57) + "</span>" };
 }
 
 function cur() {
@@ -1066,6 +1159,22 @@ S.add(grid);
 function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 
 var th = -1.2, ph = 1.0, dist = 180, tgt = new THREE.Vector3();
+var showEdges = 0, showDims = 0, bb = null, layRedraw = null, edgeMat = new THREE.LineBasicMaterial({ color: 0x000000 }), dimC = $("dim"), dctx = dimC.getContext("2d");
+function drawDims() {
+  var w = view.clientWidth, hh = view.clientHeight, dp = devicePixelRatio || 1;
+  dimC.width = w * dp; dimC.height = hh * dp; dctx.setTransform(dp, 0, 0, dp, 0, 0); dctx.clearRect(0, 0, w, hh);
+  if (!showDims || !bb) return;
+  function P3(x, y, z) { var q = new THREE.Vector3(x, y, z).project(C); return [(q.x + 1) / 2 * w, (1 - q.y) / 2 * hh]; }
+  var a = bb.mn, b = bb.mx, ac = css("--acc") || "#0a5fd6", pn = css("--panel") || "#fff";
+  dctx.strokeStyle = ac; dctx.lineWidth = 1.5; dctx.font = "12px sans-serif";
+  [[[a[0], a[1], a[2]], [b[0], a[1], a[2]], b[0] - a[0]], [[b[0], a[1], a[2]], [b[0], b[1], a[2]], b[1] - a[1]], [[a[0], a[1], a[2]], [a[0], a[1], b[2]], b[2] - a[2]]].forEach(function(l) {
+    var p = P3(l[0][0], l[0][1], l[0][2]), q = P3(l[1][0], l[1][1], l[1][2]);
+    dctx.beginPath(); dctx.moveTo(p[0], p[1]); dctx.lineTo(q[0], q[1]); dctx.stroke();
+    dctx.fillStyle = ac; dctx.fillRect(p[0] - 3, p[1] - 3, 6, 6); dctx.fillRect(q[0] - 3, q[1] - 3, 6, 6);
+    var tx = F(l[2]) + " " + unit, mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2, tw = dctx.measureText(tx).width;
+    dctx.fillStyle = pn; dctx.fillRect(mx - tw / 2 - 4, my - 9, tw + 8, 18); dctx.fillStyle = ac; dctx.fillText(tx, mx - tw / 2, my + 4);
+  });
+}
 
 function draw() {
   var w = view.clientWidth, h = view.clientHeight;
@@ -1083,7 +1192,9 @@ function draw() {
 
   C.position.set(tgt.x + dist * Math.sin(ph) * Math.cos(th), tgt.y + dist * Math.sin(ph) * Math.sin(th), tgt.z + dist * Math.cos(ph));
   C.lookAt(tgt);
+  edgeMat.color.set(getComputedStyle(document.body).color);
   R.render(S, C);
+  drawDims();
 }
 
 function update(fit) {
@@ -1097,7 +1208,9 @@ function update(fit) {
     geo.computeVertexNormals();
     var m = new THREE.Mesh(geo, p.k == 2 ? mIns : p.k ? mLid : mBox);
     S.add(m);
+    m.userData.lid = !!(g.sim && p.k == 1);
     meshes.push(m);
+    if (showEdges) { var le = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 28), edgeMat); le.userData.lid = m.userData.lid; S.add(le); meshes.push(le); }
     for (var i = 0; i < p.a.length; i++) {
       var j = i % 3;
       if (p.a[i] < mn[j]) mn[j] = p.a[i];
@@ -1106,8 +1219,13 @@ function update(fit) {
   });
 
   tgt.set((mn[0] + mxx[0]) / 2, (mn[1] + mxx[1]) / 2, (mn[2] + mxx[2]) / 2);
+  bb = { mn: mn, mx: mxx };
   if (fit) dist = Math.max(mxx[0] - mn[0], mxx[1] - mn[1], mxx[2] - mn[2]) * 2.3;
-  $("info").innerHTML = g.info;
+  curSim = g.sim || null; simRes = "";
+  if (curSim) { simPts = collectPts(g.P); simRes = simSweep(); }
+  applySim();
+  $("info").innerHTML = g.info + (simRes ? "<br>" + simRes : "");
+  if (mode == "drw" && layRedraw) layRedraw();
   draw();
 }
 
@@ -1132,8 +1250,9 @@ function orgItems() {
 function hex(x) { return /^#[0-9a-f]{6}$/i.test(x) ? x : "#888888"; }
 
 function ui() {
-  var c = $("ctl"); c.innerHTML = "";
-  var items = mode == "box" ? DEF.box.concat(ribItems()) : (mode == "org" ? orgItems() : DEF[mode]);
+  var c = $("ctl"); c.innerHTML = ""; layRedraw = null;
+  if (mode == "drw") layEditor(c);
+  var items = mode == "box" ? DEF.box.concat(ribItems()) : (mode == "org" ? orgItems() : (mode == "desk" ? DEF.desk.concat(ribItems()) : DEF[mode]));
 
   items.forEach(function(d) {
     var k = d[0], lab = U(T(d[1])), ty = d[2], r = document.createElement("div"), id = "i_" + k, e;
@@ -1168,9 +1287,69 @@ function ui() {
     });
     c.appendChild(cd);
   }
+  if (mode == "box" && v.hg) simUI(c);
+}
+
+/* SIMULACE ZAVŘENÍ VÍKA: otočení kolem osy pantu a kontrola kolize bodů víka s tělem krabičky */
+var curSim = null, simPts = [], simRes = "", simAng = 0, simTimer = null, simRange = null, simNum = null;
+function collectPts(P) {
+  var out = [], tot = 0;
+  P.forEach(function(q) { if (q.k == 1) tot += q.a.length / 3; });
+  var step = Math.max(1, Math.floor(tot / 5000));
+  P.forEach(function(q) { if (q.k == 1) for (var i = 0; i < q.a.length; i += 3 * step) out.push(q.a[i], q.a[i + 1], q.a[i + 2]); });
+  return out;
+}
+function simHit(x, y, z, s) {
+  var e = .03;
+  if (x <= e || x >= s.W - e || y <= e || y >= s.D - e || z <= e || z >= s.H - e) return false;
+  return !(x > s.t - e && x < s.W - s.t + e && y > s.t - e && y < s.D - s.t + e && z > s.f - e);
+}
+function simSweep() {
+  var s = curSim, a, i, ca, sa, y, z, n = simPts.length;
+  for (a = 1; a <= 180; a++) {
+    ca = Math.cos(a * Math.PI / 180); sa = Math.sin(a * Math.PI / 180);
+    for (i = 0; i < n; i += 3) {
+      y = s.ya + (simPts[i + 1] - s.ya) * ca - (simPts[i + 2] - s.za) * sa;
+      z = s.za + (simPts[i + 1] - s.ya) * sa + (simPts[i + 2] - s.za) * ca;
+      if (simHit(simPts[i], y, z, s)) return '<span class="warn">' + T(175) + a + "°</span>";
+    }
+  }
+  return T(174);
+}
+function applySim() {
+  var m4 = null;
+  if (curSim && simAng > 0) {
+    var a = simAng * Math.PI / 180;
+    m4 = new THREE.Matrix4().makeTranslation(0, curSim.ya, curSim.za).multiply(new THREE.Matrix4().makeRotationX(a)).multiply(new THREE.Matrix4().makeTranslation(0, -curSim.ya, -curSim.za));
+  }
+  meshes.forEach(function(m) {
+    if (!m.userData.lid) return;
+    if (m4) { m.matrixAutoUpdate = false; m.matrix.copy(m4); }
+    else { m.matrixAutoUpdate = true; m.updateMatrix(); }
+    m.matrixWorldNeedsUpdate = true;
+  });
+}
+function simUI(c) {
+  var d = document.createElement("div"), pb = document.createElement("button");
+  d.className = "row";
+  d.innerHTML = "<label>" + T(171) + " – " + T(173) + '</label><input type="range" min="0" max="180" step="1" value="' + simAng + '"><input type="number" min="0" max="180" value="' + simAng + '">';
+  simRange = d.children[1]; simNum = d.children[2];
+  simRange.oninput = function() { simAng = +simRange.value; simNum.value = simAng; applySim(); draw(); };
+  simNum.oninput = function() { simAng = Math.max(0, Math.min(180, +simNum.value || 0)); simRange.value = simAng; applySim(); draw(); };
+  pb.textContent = "▶ " + T(172); pb.className = "alt"; pb.style.gridColumn = "1/3";
+  pb.onclick = function() {
+    clearInterval(simTimer); simAng = 0;
+    simTimer = setInterval(function() {
+      simAng = Math.min(180, simAng + 2); simRange.value = simAng; simNum.value = simAng; applySim(); draw();
+      if (simAng >= 180) clearInterval(simTimer);
+    }, 30);
+  };
+  d.appendChild(pb); c.appendChild(d);
 }
 
 function lbl() {
+  $("bEdge").textContent = T(165); $("bDim").textContent = T(166);
+  $("bEdge").className = "alt" + (showEdges ? " on" : ""); $("bDim").className = "alt" + (showDims ? " on" : "");
   $("tbox").textContent = T(42);
   $("torg").textContent = T(43);
   $("tvase").textContent = T(82);
@@ -1235,9 +1414,9 @@ var PRE = {
 };
 
 PRE.desk = [
-  { n: 146, p: {} },
+  { n: 146, p: { fl: 1, fo: 0, fw: 2, fp: 4, fd: .8 } },
   { n: 147, p: { dnw: 76, dnd: 76, dwr: 60, des: 12, dsc: 0, dnp: 2, dhh: 90, dhn: 22, dhf: 50, dgn: 25 } },
-  { n: 148, p: { dwr: 110, des: 20, dsc: 26, dnp: 3, dhh: 120, dhn: 30, dhf: 60, dgn: 40 } },
+  { n: 148, p: { fl: 2, fo: 1, fw: 2, fp: 6, fd: 1, dwr: 110, des: 20, dsc: 26, dnp: 3, dhh: 120, dhn: 30, dhf: 60, dgn: 40 } },
   { n: 149, p: { dwr: 90, des: 25, dsc: 0, dnp: 2, dhh: 100, dhf: 45, dgn: 50 } }
 ];
 PRE.drw = [
@@ -1245,6 +1424,8 @@ PRE.drw = [
   { n: 156, p: { xw: 400, xd: 300, xh: 60, xc: 4, xr: 3, xk: 1, xrr: 4 } },
   { n: 157, p: { xw: 350, xd: 250, xh: 50, xc: 3, xr: 1, xk: 2, xrr: 6 } },
   { n: 158, p: { xw: 200, xd: 150, xh: 25, xc: 5, xr: 3, xk: 1, xdh: 70, xrr: 3 } }
+,
+  { n: 170, p: { xw: 300, xd: 200, xh: 50, xc: 3, xr: 2, xk: 1, layN: "3x2x1", lay: { d: "v", p: .3, a: { d: "v", p: .5, a: {}, b: {} }, b: { d: "v", p: .35, a: { d: "h", p: .4, a: {}, b: {} }, b: { d: "h", p: .25, a: {}, b: { d: "h", p: .33, a: {}, b: { d: "h", p: .5, a: {}, b: {} } } } } } } }
 ];
 function withP(pp, fn) {
   var o = v; v = pp;
@@ -1256,7 +1437,7 @@ function desc() {
   if (mode == "org") return "⌀" + F(v.ow) + " × " + F(v.oh) + " " + unit;
   if (mode == "vase") return "H: " + F(v.vh) + " " + unit + " · ⌀ " + F(v.vm) + " " + unit;
   if (mode == "lamp") return "H: " + F(v.lhght) + " " + unit + " · ⌀ " + F(v.ld) + " " + unit;
-  if (mode == "desk") return F(v.dnw + 2 * v.dtol + v.dwr + 3 * v.dwl) + " × " + F(v.dnd + 2 * v.dtol + 2 * v.dwl) + " × " + F(v.dhh) + " " + unit;
+  if (mode == "desk") return F(v.dnw + 2 * v.dtol + (v.dwr > 0 ? v.dwr + 3 * v.dwl : 2 * v.dwl)) + " × " + F(v.dnd + 2 * v.dtol + 3 * v.dwl + v.dbd) + " × " + F(v.dhh) + " " + unit;
   if (mode == "drw") return F(v.xw) + " × " + F(v.xd) + " × " + F(v.xh) + " " + unit + " · " + v.xc + "×" + v.xr;
   return "";
 }
@@ -1308,7 +1489,7 @@ function showPre() {
     if (!thumbs[key]) thumbs[key] = thumb(pp);
     card.innerHTML = '<img alt="" src="' + thumbs[key] + '"><div><b>' + T(q.n) + "</b>" + withP(pp, desc) + '</div><div class="cb"><button class="alt">' + T(67) + '</button><button>STL</button></div>';
     var b = card.querySelectorAll("button");
-    b[0].onclick = function() { Object.assign(v, pp); ui(); update(1); view.scrollIntoView({ behavior: "smooth", block: "center" }); };
+    b[0].onclick = function() { Object.assign(v, pp); v.lay = pp.lay ? JSON.parse(JSON.stringify(pp.lay)) : null; ui(); update(1); view.scrollIntoView({ behavior: "smooth", block: "center" }); };
     b[1].onclick = function() { save((mode) + "-" + (i + 1), "stl", withP(pp, stl)); };
     el.appendChild(card);
   });
@@ -1327,6 +1508,9 @@ $("tvase").onclick = function() { setMode("vase", 1); };
 $("tlamp").onclick = function() { setMode("lamp", 1); };
 $("tdesk").onclick = function() { setMode("desk", 1); };
 $("tdrw").onclick = function() { setMode("drw", 1); };
+$("bEdge").onclick = function() { showEdges = !showEdges; lbl(); update(); };
+$("bDim").onclick = function() { showDims = !showDims; lbl(); draw(); };
+$("vtools").addEventListener("pointerdown", function(e) { e.stopPropagation(); });
 
 $("un").onchange = function() { unit = $("un").value; K = unit == "in" ? 25.4 : 1; ui(); update(); showPre(); };
 $("lg").value = lang;
