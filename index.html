@@ -632,7 +632,6 @@ function boxParts() {
     for (qq = 0; qq < 4; qq++) { ins = chL * (qq + .5) / 4; P.push({ a: tz(ex(rr(x0 + ins, y0 + ins, x1 - ins, y1 - ins, Math.max(0, Rl - ins)), chL / 4, inn), lt + lh - chL + qq * chL / 4), k: 1 }); }
   }
   if (hg && ok) {
-    // Pant bez podpor: kloub = svislý podstavec + oblouk nahoře (žádné převisy), čep s malou vůlí.
     var za = (H + lt + .3) / 2, gp = .8, ya = D + r + gp, yp = D + 2 * (r + gp) - .3, rp = 1.4, rh = rp + Math.max(Math.min(c + .1, .7), .3), gx = .5 + c,
         uw = hg == 1 ? zone : Math.min(20, (zone - (hg - 1) * 8) / hg), U = [], q, k, arc = [];
     for (q = 0; q < hg; q++) U.push([hg == 1 ? xs : xs + q * (uw + (zone - hg * uw) / (hg - 1)), uw]);
@@ -792,17 +791,17 @@ function vaseParts() {
   
   function getRadius(u) {
     var r = Rb;
-    if (shapeType == 0) { // Rovný
+    if (shapeType == 0) {
       r = Rb;
-    } else if (shapeType == 1) { // Soudkovitý
+    } else if (shapeType == 1) {
       r = Rb + (Rm - Rb) * Math.sin(u * Math.PI);
-    } else if (shapeType == 2) { // Kuželový
+    } else if (shapeType == 2) {
       r = Rb + (Rm - Rb) * u;
-    } else if (shapeType == 3) { // Přesýpací hodiny
+    } else if (shapeType == 3) {
       r = Rb + (Rm - Rb) * (0.5 + 0.5 * Math.cos(u * Math.PI * 2));
-    } else if (shapeType == 4) { // Kapka
+    } else if (shapeType == 4) {
       r = Rb + (Rm - Rb) * Math.sin(Math.pow(u, 0.7) * Math.PI);
-    } else if (shapeType == 5) { // S-křivka
+    } else if (shapeType == 5) {
       r = Rb + (Rm - Rb) * (0.5 - 0.5 * Math.cos(u * Math.PI * 2));
     }
     return Math.max(4, r);
@@ -886,7 +885,6 @@ function vaseParts() {
 }
 
 /* ROZŠÍŘENÝ A VYHLAZENÝ GENERÁTOR LAMP */
-/* ZÁKLADNY LAMP: kapsa na zdroj světla, nákružek pro stínidlo a volitelný otvor pro kabel (rozměry zdrojů jsou orientační a jdou si ověřit) */
 var LSRC = [null,
   { d: 62.2, h: 27.6, minH: 40, needR: 36.5, ty: "p" },
   { d: 59, h: 8, minH: 40, needR: 34.5, ty: "k", hb: 26 },
@@ -902,8 +900,6 @@ function cdisc(ox, R, a0, ws, rn, n) {
   [[rn, -ws / 2], [rn, ws / 2]].forEach(function(q) { p.push([q[0] * cs - q[1] * sn, q[0] * sn + q[1] * cs]); });
   return p.map(function(q) { return [q[0] + ox, q[1]]; });
 }
-/* puck: uzavřená základna s kapsou. LED kit a objímky: základna BEZ DNA + horní deska (kapsa pro disk s kanálkem pro kabel, nebo otvor pro závit
-   objímky, kterou drží matice zespodu) + kulatý otvor pro kabel u dna stěny (klenutý, aby se tiskl bez podpor) + samostatné spodní víčko */
 function lampBase(S, Rb, t, ox, cab, ang, hdU, hbU, cd) {
   var P = [], a0 = ang * Math.PI / 180, outer = cir(ox, 0, Rb, 64), Rsp = Rb - t - .35, ws = 8, Ri = Rb - 3, hb, pt, rin, q;
   if (S.ty == "p") {
@@ -1051,7 +1047,6 @@ function exH(pts, holes, d) {
   holes.forEach(function(hl) { s.holes.push(new THREE.Path(hl.map(function(p) { return new THREE.Vector2(p[0], p[1]); }))); });
   return new THREE.ExtrudeGeometry(s, { depth: d, bevelEnabled: false }).attributes.position.array;
 }
-/* Rozdělená vložka: švy jsou dvojité svislé stěny přes celou hloubku, spojené skrytými kolíky; používá volné rozvržení */
 function drawerSplit() {
   var cl = v.xcl, W = v.xw - 2 * cl, D = v.xd - 2 * cl, H = v.xh, t = v.xt, f = v.xf, sg = .3, tl = v.xtl, hd = f + (H - f) * v.xdh / 100,
       K = Math.ceil(W / v.xbx) - 1, np = Math.max(1, Math.round(v.xpn)), pr = v.xpd / 2, pl = tl - 2.2, ds = pl + .6, zc = (f + hd) / 2,
@@ -1353,7 +1348,7 @@ function ui() {
   if (mode == "box" && v.hg) simUI(c);
 }
 
-/* SIMULACE ZAVŘENÍ VÍKA: otočení kolem osy pantu a kontrola kolize bodů víka s tělem krabičky */
+/* SIMULACE ZAVŘENÍ VÍKA */
 var curSim = null, simPts = [], simRes = "", simAng = 0, simTimer = null, simRange = null, simNum = null;
 function collectPts(P) {
   var out = [], tot = 0;
@@ -1490,10 +1485,10 @@ PRE.drw = [
   { n: 155, p: { xw: 300, xd: 240, xh: 50, xc: 3, xr: 2, xk: 1.5, xrr: 8 } },
   { n: 156, p: { xw: 400, xd: 300, xh: 60, xc: 4, xr: 3, xk: 1, xrr: 4 } },
   { n: 157, p: { xw: 350, xd: 250, xh: 50, xc: 3, xr: 1, xk: 2, xrr: 6 } },
-  { n: 158, p: { xw: 200, xd: 150, xh: 25, xc: 5, xr: 3, xk: 1, xdh: 70, xrr: 3 } }
-,
+  { n: 158, p: { xw: 200, xd: 150, xh: 25, xc: 5, xr: 3, xk: 1, xdh: 70, xrr: 3 } },
   { n: 170, p: { xw: 300, xd: 200, xh: 50, xc: 3, xr: 2, xk: 1, layN: "3x2x1", lay: { d: "v", p: .3, a: { d: "v", p: .5, a: {}, b: {} }, b: { d: "v", p: .35, a: { d: "h", p: .4, a: {}, b: {} }, b: { d: "h", p: .25, a: {}, b: { d: "h", p: .33, a: {}, b: { d: "h", p: .5, a: {}, b: {} } } } } } } }
 ];
+
 function withP(pp, fn) {
   var o = v; v = pp;
   try { return fn(); } finally { v = o; }
@@ -1648,14 +1643,36 @@ $("bPng").onclick = function() { draw(); R.domElement.toBlob(function(b) { save(
 lbl();
 setMode("box");
 
-/* POČÍTADLO NÁVŠTĚV (GoatCounter, zdarma, bez cookies): zaregistruj se na goatcounter.com, vyber si kód (např. "fluxdesigner"),
-   v nastavení zapni "Allow adding visitor counts on your website" a kód vlož mezi uvozovky. Dokud je prázdný, nic se nenačítá. */
+/* POČÍTADLO NÁVŠTĚV (GoatCounter): Zaznamenává návštěvu a stahuje aktuální veřejné číslo celkových zobrazení */
 var GC_CODE = "fluxdesigner";
 (function() {
   if (!GC_CODE) return;
-  var s = document.createElement("script"); s.async = true; s.setAttribute("data-goatcounter", "https://" + GC_CODE + ".goatcounter.com/count"); s.src = "//gc.zgo.at/count.js"; document.head.appendChild(s);
-  var el = document.createElement("div"); el.style.cssText = "padding:6px 20px 24px;color:var(--mute);font-size:13px"; document.body.appendChild(el);
-  fetch("https://" + GC_CODE + ".goatcounter.com/counter/TOTAL.json").then(function(r) { return r.json(); }).then(function(d) { el.textContent = T(194) + ": " + d.count; }).catch(function() {});
+  var s = document.createElement("script"); 
+  s.async = true; 
+  s.setAttribute("data-goatcounter", "https://" + GC_CODE + ".goatcounter.com/count"); 
+  s.src = "//gc.zgo.at/count.js"; 
+  document.head.appendChild(s);
+
+  var el = document.createElement("div"); 
+  el.style.cssText = "padding:6px 20px 24px;color:var(--mute);font-size:13px"; 
+  document.body.appendChild(el);
+
+  fetch("https://" + GC_CODE + ".goatcounter.com/counter/TOTAL.json")
+    .then(function(r) { return r.json(); })
+    .then(function(d) { 
+      if (d && typeof d.count !== "undefined") {
+        el.textContent = T(194) + ": " + d.count;
+      }
+    })
+    .catch(function() {
+      // Případný fallback načtení přes počítadlo stránek
+      fetch("https://" + GC_CODE + ".goatcounter.com/count//shapemy3D.json")
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && d.count) el.textContent = T(194) + ": " + d.count;
+        })
+        .catch(function() {});
+    });
 })();
 })();
 </script>
