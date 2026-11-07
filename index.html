@@ -1629,6 +1629,15 @@ function stl() {
 }
 
 async function save(n, e, d) {
+  // Zaznamenání události stažení do GoatCounteru
+  if (window.goatcounter && window.goatcounter.count) {
+    window.goatcounter.count({
+      path: 'download-' + e + '-' + n,
+      title: 'Download ' + e.toUpperCase() + ': ' + n,
+      event: true
+    });
+  }
+
   var a = document.createElement("a");
   a.href = URL.createObjectURL(d instanceof Blob ? d : new Blob([d]));
   a.download = n + "." + e;
@@ -1647,37 +1656,12 @@ setMode("box");
 var GC_CODE = "fluxdesigner";
 (function() {
   if (!GC_CODE) return;
-  // 1. Skript pro započítání návštěvy
+  // Skript pro započítání návštěv
   var s = document.createElement("script"); 
   s.async = true; 
   s.setAttribute("data-goatcounter", "https://" + GC_CODE + ".goatcounter.com/count"); 
   s.src = "//gc.zgo.at/count.js"; 
   document.head.appendChild(s);
-
-  // 2. Vytvoření textového prvku v zápatí
-  var el = document.createElement("div"); 
-  el.style.cssText = "padding:6px 20px 24px;color:var(--mute);font-size:13px"; 
-  document.body.appendChild(el);
-
-  // 3. Načtení konkrétního počtu návštěv z API
-  fetch("https://" + GC_CODE + ".goatcounter.com/counter//shapemy3D.json")
-    .then(function(r) { return r.json(); })
-    .then(function(d) { 
-      if (d && typeof d.count !== "undefined") {
-        el.textContent = T(194) + ": " + d.count;
-      }
-    })
-    .catch(function() {
-      // Záložní pokus o načtení celkových čísel účtu
-      fetch("https://" + GC_CODE + ".goatcounter.com/counter/TOTAL.json")
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          if (d && typeof d.count !== "undefined") {
-            el.textContent = T(194) + ": " + d.count;
-          }
-        })
-        .catch(function() {});
-    });
 })();
 })();
 </script>
